@@ -11,8 +11,7 @@ This prototype was created using Javascript, HTML and CSS. It was tested in Safa
 All code and licenses are copyrighted and subjected to their respective copyright holders.
 
 David Enrique Sanchez Oliva
-D.E.Sanchez-Oliva2@newcastle.ac.uk
-davidenrique@gmail.com
+D.E.Sanchez-Oliva2@newcastle.ac.uk, davidenrique@gmail.com
 
 Charles Morisset
 Charles.Morisset@newcastle.ac.uk
@@ -51,7 +50,7 @@ Charles.Morisset@newcastle.ac.uk
 
   e.g. http://192.168.0.13/index.html
 
-  You can use the code life from the internet on the following link:
+  You can use the software live from the Internet on the following link:
 
   https://david-san.github.io/CompRes/public_html/index.html
 
@@ -65,5 +64,4 @@ Charles.Morisset@newcastle.ac.uk
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* For any corrections, bug fixing or comments, you can send an email to davidenrique@gmail.com
