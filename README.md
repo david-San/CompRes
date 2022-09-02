@@ -47,9 +47,13 @@ Charles.Morisset@newcastle.ac.uk
 
 * How to run tests
 
-  Open on your web browser the page. 
+  If you are using your local machine, then open on your web browser the page. 
 
   e.g. http://192.168.0.13/index.html
+
+  You can use the code life from the internet on the following link:
+
+  https://david-san.github.io/CompRes/public_html/index.html
 
 * Deployment instructions
 
