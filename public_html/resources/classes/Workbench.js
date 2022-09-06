@@ -27,6 +27,7 @@
 
 
 
+
 /**
  * This class starts the object creation and the simulation
  */
@@ -44,14 +45,38 @@ class Workbench {
 
         //Interface structures
         let _samples = [];
+        let _plotDownloadOptions = [];
         this.samples = _samples;
         this._that = this;
 
         //Internal structures
         this.visualiser;
-
         //Databank
         this.workbenchDataBank;
+
+        //Exporting plot drawings configuration
+        this.config = {
+            responsive: true,
+            toImageButtonOptions: {
+                format: 'svg', // one of png, svg, jpeg, webp
+                filename: 'custom_image',
+
+                //height: "", //Dynamic screen size
+                //width: "", //Dynamic screen size
+
+                //Square illustrations
+                //height: 500, //Produce exports or the same size
+                //width: 700, //Produce exports or the same size
+
+                //Panoramic illustrations
+                //height: 400, //Produce exports or the same size
+                //width: 1200, //Produce exports or the same size
+
+                scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+            }
+        };
+
+ 
 
 
 
@@ -72,140 +97,141 @@ class Workbench {
 
 
         /**
-         * This method pushes sample elements into the samples queue
-         * @param {type} element
-         * @returns {undefined}
+         * This private method creates the sample menus
          */
-        var sampleMenuPush = function (element) {
-
-            _samples.push(element);
-
-            //It pushes the element to the menu
-            sampleMenuCreate(element);
-        };
+        var createSampleMenu = function () {
 
 
 
 
 
-        /**
-         * This  method creates one sample menu
-         * 
-         * @param {type} sample
-         * @returns {undefined}
-         */
-        var sampleMenuCreate = function (sample) {
+            /**
+             * This method pushes sample elements into the samples queue
+             * @param {type} element
+             * @returns {undefined}
+             */
+            var sampleMenuPush = function (element) {
 
-            //It attaches an event handler for the "select sample" menu
-            let paragraphElement = document.getElementById('samples_dropdown');
+                _samples.push(element);
 
-            //creating the menu item
-            let myMenuItem = document.createElement("option");
-            myMenuItem.setAttribute("value", sample.id);
-            myMenuItem.text = "Sample " + sample.id;
-
-            /*Append the menu item*/
-            paragraphElement.appendChild(myMenuItem);
-        };
+                //It pushes the element to the menu
+                sampleMenuCreate(element);
+            };
 
 
 
 
 
-        /**
-         * This method handles events received from the select menu when loading a sample policy
-         * 
-         * @returns {undefined}
-         */
-        var sampleMenuHandleSelect = function () {
+            /**
+             * This  method creates one sample menu
+             * 
+             * @param {type} sample
+             * @returns {undefined}
+             */
+            var sampleMenuCreate = function (sample) {
 
-            //Selected index
-            let selIndex = this.selectedIndex;
+                //It attaches an event handler for the "select sample" menu
+                let paragraphElement = document.getElementById('samples_dropdown');
 
-            if (selIndex !== 0) {
+                //creating the menu item
+                let myMenuItem = document.createElement("option");
+                myMenuItem.setAttribute("value", sample.id);
+                myMenuItem.text = "Sample " + sample.id;
+
+                /*Append the menu item*/
+                paragraphElement.appendChild(myMenuItem);
+            };
 
 
-                //It adjustes the index to use on an array
-                selIndex = (selIndex > 0) ? selIndex - 1 : selIndex;
 
-                //Finds the textSample corresponding to the selected value
-                let sample = _samples[selIndex];
 
-                // let x = window.confirm("Are you sure you want to load Sample " + sample.id + "?");
-                let x = true;
 
-                if (x) {
+            /**
+             * This method handles events received from the select menu when loading a sample policy
+             * 
+             * @returns {undefined}
+             */
+            var sampleMenuHandleSelect = function () {
 
-                    //Updates the interface with the samples
-                    sampleMenuSetValues(sample);
+                //Selected index
+                let selIndex = this.selectedIndex;
 
-                } else {
+                if (selIndex !== 0) {
 
-                    //It resets the menu to show the 'Samples...' label
-                    this[0].selected = "selected";
 
+                    //It adjustes the index to use on an array
+                    selIndex = (selIndex > 0) ? selIndex - 1 : selIndex;
+
+                    //Finds the textSample corresponding to the selected value
+                    let sample = _samples[selIndex];
+
+                    // let x = window.confirm("Are you sure you want to load Sample " + sample.id + "?");
+                    let x = true;
+
+                    if (x) {
+
+                        //Updates the interface with the samples
+                        sampleMenuSetValues(sample);
+
+                    } else {
+
+                        //It resets the menu to show the 'Samples...' label
+                        this[0].selected = "selected";
+
+                    }
                 }
+            };
+
+
+
+
+
+            /**
+             * This method sets the interface with a JSON object.
+             * 
+             * @param {JSON} parameters 
+             */
+            var sampleMenuSetValues = function (parameters) {
+
+                //Writing parameters to the interface
+
+                //Commmon
+                document.getElementById("numberOfCells").value = parameters.numberOfCells;
+                document.getElementById("numberOfFrames").value = parameters.numberOfFrames;
+                document.getElementById("framesDiscard").value = parameters.initialFramesToDiscard;
+
+
+                document.getElementById("densityInit").value = parameters.densityInit;
+                document.getElementById("densityEnd").value = parameters.densityEnd;
+                document.getElementById("densitySteps").value = parameters.densitySteps;
+
+                document.getElementById("plotMaximumYValue").value = parameters.plotMaximumYValue;
+                document.getElementById("plotMinimumYValue").value = parameters.plotMinimumYValue;
+
+                document.getElementById("movableMaxSpeed").value = parameters.movableMaxSpeed;
+                document.getElementById("movablePerformanceHighLimit").value = parameters.movablePerformanceHighLimit;
+                document.getElementById("movablePerformanceLowLimit").value = parameters.movablePerformanceLowLimit;
+
+                //Control
+                document.getElementById("controlProbabilityRandomBreak").value = parameters.controlProbabilityRandomBreak;
+                document.getElementById("controlNumberOfSimulations").value = parameters.controlNumberOfSimulations;
+                document.getElementById("controlMovablesHacked").value = parameters.controlMovablesHacked;
+
+                //Attack
+                document.getElementById("attackProbabilityRandomBreak").value = parameters.attackProbabilityRandomBreak;
+                document.getElementById("attackNumberOfSimulations").value = parameters.attackNumberOfSimulations;
+                document.getElementById("attackMovablesHacked").value = parameters.attackMovablesHacked;
+
             }
-        };
 
 
 
 
 
-        /**
-         * This method sets the interface with a JSON object.
-         * 
-         * @param {JSON} parameters 
-         */
-        var sampleMenuSetValues = function (parameters) {
-
-            //Writing parameters to the interface
-
-            //Commmon
-            document.getElementById("numberOfCells").value = parameters.numberOfCells;
-            document.getElementById("numberOfFrames").value = parameters.numberOfFrames;
-            document.getElementById("framesDiscard").value = parameters.initialFramesToDiscard;
-
-
-            document.getElementById("densityInit").value = parameters.densityInit;
-            document.getElementById("densityEnd").value = parameters.densityEnd;
-            document.getElementById("densitySteps").value = parameters.densitySteps;
-
-            document.getElementById("plotMaximumYValue").value = parameters.plotMaximumYValue;
-            document.getElementById("plotMinimumYValue").value = parameters.plotMinimumYValue;
-
-            document.getElementById("movableMaxSpeed").value = parameters.movableMaxSpeed;
-            document.getElementById("movablePerformanceHighLimit").value = parameters.movablePerformanceHighLimit;
-            document.getElementById("movablePerformanceLowLimit").value = parameters.movablePerformanceLowLimit;
-
-            //Control
-            document.getElementById("controlProbabilityRandomBreak").value = parameters.controlProbabilityRandomBreak;
-            document.getElementById("controlNumberOfSimulations").value = parameters.controlNumberOfSimulations;
-            document.getElementById("controlMovablesHacked").value = parameters.controlMovablesHacked;
-
-            //Attack
-            document.getElementById("attackProbabilityRandomBreak").value = parameters.attackProbabilityRandomBreak;
-            document.getElementById("attackNumberOfSimulations").value = parameters.attackNumberOfSimulations;
-            document.getElementById("attackMovablesHacked").value = parameters.attackMovablesHacked;
-
-        }
-
-
-
-
-
-        /**
-         * This method inits the Workbench ataching interface elements to methods
-         */
-        var init = function () {
 
             //It attaches an event handler for the "select sample" menu
             if (document.getElementById('samples_dropdown') != null)
                 document.getElementById('samples_dropdown').addEventListener('change', sampleMenuHandleSelect, false);
-
-
-
-
 
             let mySample1 = {
                 "id": 1,
@@ -257,9 +283,7 @@ class Workbench {
                 "attackMovablesHacked": 0
             }
 
-
             sampleMenuPush(mySample2);
-
 
             let mySample3 = {
                 "id": 3,
@@ -285,12 +309,161 @@ class Workbench {
                 "attackMovablesHacked": 1
             }
 
-
             sampleMenuPush(mySample3);
 
+        }
 
 
 
+
+
+        /**
+          * This private method creates the sample menus
+          */
+        var createDownloadOptionsMenu = function () {
+
+
+
+
+
+
+            /**
+                * This method pushes plot Download elements into the plotDownloadOptions queue
+                * @param {type} element
+                * @returns {undefined}
+                */
+            var plotDownloadOptionsMenuPush = function (element) {
+
+                _plotDownloadOptions.push(element);
+
+                //It pushes the element to the menu
+                plotDownloadOptionsMenuCreate(element);
+            };
+
+
+
+
+
+            /**
+             * This  method creates one sample menu
+             * 
+             * @param {type} option
+             * @returns {undefined}
+             */
+            var plotDownloadOptionsMenuCreate = function (option) {
+
+                //It attaches an event handler for the "select sample" menu
+                let paragraphElement = document.getElementById('plotDownloadOptions_dropdown');
+
+                //creating the menu item
+                let myMenuItem = document.createElement("option");
+                myMenuItem.setAttribute("value", option.id);
+                myMenuItem.text = option.description;
+
+                /*Append the menu item*/
+                paragraphElement.appendChild(myMenuItem);
+            };
+
+
+
+
+
+            /**
+             * This method handles events received from the select menu when loading a sample policy
+             * 
+             * @returns {undefined}
+             */
+            var plotDownloadOptionsMenuHandleSelect = function () {
+
+                //Selected index
+                let selIndex = this.selectedIndex;
+
+                if (selIndex !== 0) {
+
+
+                    //It adjustes the index to use on an array
+                    selIndex = (selIndex > 0) ? selIndex - 1 : selIndex;
+
+                    //Finds the textSample corresponding to the selected value
+                    let option = _plotDownloadOptions[selIndex];
+
+                    // let x = window.confirm("Are you sure you want to load Sample " + sample.id + "?");
+                    let x = true;
+
+                    if (x) {
+
+                        //Updates the interface with the options
+                        plotDownloadOptionsMenuSetValues(option);
+                    }
+
+                }
+            };
+
+
+
+
+
+            /**
+            * This method sets the interface with a JSON object.
+            * 
+            * @param {JSON} parameters 
+            */
+            var plotDownloadOptionsMenuSetValues = function (parameters) {
+
+                workbench.config.toImageButtonOptions.width = parameters.width
+                workbench.config.toImageButtonOptions.height = parameters.height;
+
+            }
+
+
+
+
+
+            //It attaches an event handler for the "select sample" menu
+            if (document.getElementById('plotDownloadOptions_dropdown') != null)
+                document.getElementById('plotDownloadOptions_dropdown').addEventListener('change', plotDownloadOptionsMenuHandleSelect, false);
+
+
+            let myPlotOption1 = {
+                "id": 1,
+                "description": "Current Window size",
+                "width": "",
+                "height": ""
+            }
+            plotDownloadOptionsMenuPush(myPlotOption1);
+
+            let myPlotOption2 = {
+                //Produce exports for square illustrations.
+                "id": 1,
+                "description": "Square illustrations (700x500)",
+                "width": 700,
+                "height": 500
+            }
+            plotDownloadOptionsMenuPush(myPlotOption2);
+
+            let myPlotOption3 = {
+                //Produce exports for wide illustrations
+                "id": 1,
+                "description": "Panoramic illustrations (1200x400)",
+                "width": 1200,
+                "height": 400
+            }
+            plotDownloadOptionsMenuPush(myPlotOption3);
+
+        }
+
+
+
+
+
+        /**
+         * This method inits the Workbench ataching interface elements to methods
+         */
+        var init = function () {
+
+            //Creates menus
+            createSampleMenu();
+            createDownloadOptionsMenu();
 
         };
 
@@ -300,6 +473,8 @@ class Workbench {
 
         // ========================================================================== //
         // Privileged methods
+
+
 
 
 
@@ -582,13 +757,6 @@ class Workbench {
 
 
 
-
-
-
-
-
-
-
     /**
      * This method calculates the resilience index for the flow.
      * It takes into consideration the common resilience region.
@@ -684,8 +852,6 @@ class Workbench {
 
 
 
-
-
     /**
      * This method calculates the resilience reigion numerically.
      */
@@ -763,6 +929,7 @@ class Workbench {
 
 
 
+
     /**
      * 
      * This prototype method draw the results
@@ -770,14 +937,8 @@ class Workbench {
      */
     drawResults() {
 
-        if (typeof this.visualiser === 'undefined') {
-
-            //Visualise results
-            this.visualiser = new Visualiser(this.workbenchDataBank);
-        }
-
+        this.visualiser = new Visualiser(this.workbenchDataBank, this.config);
         this.visualiser.drawResults();
-        //Create visualisations
         this.visualiser.createSimulationLinks();
 
     }
@@ -798,6 +959,7 @@ class Workbench {
         this.calculateResilienceIndex();
         this.drawResults();
     }
+
 
 
 
@@ -834,11 +996,6 @@ class Workbench {
         input.click();
 
     }
-
-
-
-
-
 
 
 
@@ -894,6 +1051,13 @@ class Workbench {
 
         }
     }
+
+
+
+
+
+
+
 }
 
 

@@ -16,7 +16,7 @@ and open the template in the editor.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="../styles/workbench.css" rel="stylesheet" type="text/css" />
-    
+
     <link rel="icon" type="image/x-icon" href="../icons/favicon.ico">
 
     <!-- Offline version-->
@@ -35,6 +35,12 @@ and open the template in the editor.
 
 
 
+
+
+
+
+
+
     <!--  - - - - - - - - - - - - - - - - - - - - - - - - -Extra controls-->
     <div id="panelExtraControls">
         <fieldset>
@@ -45,6 +51,9 @@ and open the template in the editor.
     </div>
 
 
+
+
+
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -h1 -->
     <h1> CompRes </h1>
 
@@ -52,40 +61,28 @@ and open the template in the editor.
 
 
     <!--  - - - - - - - - - - - - - - - - - - - - - - - -Controls-->
-    <div id="panelWorkbenchControls">
+    <div id="panelControls">
+        <div id="panelLeft">
+            <input id="loadButton" type="button" value="Load" onclick="workbench.load();return false;" />
+            <select id="samples_dropdown">
+                <option value="None" selected="selected">Samples...</option>
+            </select>
+        </div>
 
-        <!-- <fieldset> -->
-        <select id="samples_dropdown">
-            <option value="None" selected="selected">Samples...</option>
-        </select>
 
-        <input id="loadButton" type="button" value="Load" onclick="workbench.load();return false;" />
 
-        <input id="runButton" type="button" value="Run" onclick="workbench.run();return false;" />
+        <div id="panelRight">
+            <input id="runButton" type="button" value="Run" onclick="workbench.run();return false;" />
+        </div>
 
-        <input id="saveButton" type="button" value="Save" onclick="workbench.save();return false;" />
+        <div id="panelRight">
+            <input id="saveButton" type="button" value="Save" onclick="workbench.save();return false;" />
+            <select id="plotDownloadOptions_dropdown">
+                <option value="None" selected="selected">Plot Download Option...</option>
+            </select>
+        </div>
 
-        <!-- <input id="helpButton" type="button" value="Help" onclick="window.open('../pages/help.html', 'Help');" /> -->
-        <!-- <input id="aboutButton" type="button" value="About" onclick="window.open('../pages/about.html', 'About');" /> -->
-
-        <!-- <input id="runButton" type="button" value="Draw Results" onclick="workbench.drawResults();return false;" /> -->
-        <!-- <input id="pauseButton" type="button" value="Pause" onclick="simulation.pause();return false;" /> -->
-        <!-- </fieldset> -->
     </div>
-
-
-
-    <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - -Controls-->
-    <!-- <div id="panelControls"> -->
-    <!-- <fieldset> -->
-    <!-- <input id="runButton" type="button" value="Run" onclick="workbench.run();return false;" /> -->
-    <!-- <input id="runButton" type="button" value="Draw Results" onclick="workbench.drawResults();return false;" /> -->
-    <!-- <input id="pauseButton" type="button" value="Pause" onclick="simulation.pause();return false;" /> -->
-    <!-- <input id="helpButton" type="button" value="Help" onclick="window.open('../pages/help.html', 'Help');" /> -->
-    <!-- </fieldset> -->
-    <!-- </div> -->
-
-
 
 
 
@@ -121,8 +118,6 @@ and open the template in the editor.
             <span class="label">Movable Performance Low Limit</span> <input class="input" type="text"
                 id="movablePerformanceLowLimit"><br>
 
-
-
         </div>
 
 
@@ -154,20 +149,6 @@ and open the template in the editor.
 
     <!-- It stops the layout previous options-->
     <div id="clear"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -208,10 +189,6 @@ and open the template in the editor.
 
     <script type="text/javascript" src="../classes/WorkbenchDataBank.js"></script>
     <script type="text/javascript" src="../classes/Workbench.js"></script>
-
-
-
-
 
 </body>
 

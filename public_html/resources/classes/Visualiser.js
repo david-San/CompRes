@@ -49,7 +49,11 @@
  */
 
 
-var _sharedObject = {};
+/**
+ * This object is used to share variables between pages
+ */
+ var _sharedObject = {};
+
 
 
 class Visualiser {
@@ -59,7 +63,7 @@ class Visualiser {
      * 
      * @param {Stage} stage 
      */
-    constructor(workbenchDataBank) {
+    constructor(workbenchDataBank, config) {
 
 
 
@@ -73,31 +77,14 @@ class Visualiser {
 
 
         //This is the configuration for exporting plot drawings
-        this.config = {
-            responsive: true,
-            toImageButtonOptions: {
-                format: 'svg', // one of png, svg, jpeg, webp
-                filename: 'custom_image',
-
-                 //Square illustrations
-                // height: 500, //Produce exports or the same size. Comment to have dynamic screen size
-                // width: 700, //Produce exports or the same size. Comment to have dynamic screen size
-
-                //Panoramic illustrations
-                height: 400, //Produce exports or the same size. Comment to have dynamic screen size
-                width: 1200, //Produce exports or the same size. Comment to have dynamic screen size
-
-                scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
-            }
-        };
-
+        this.config = config;
 
         this.plotMaximumYValue = this.workbenchDataBank.common.plotMaximumYValue
         this.plotMinimumYValue = this.workbenchDataBank.common.plotMinimumYValue;
 
         //Pointer to communication channel
         _sharedObject.workbenchDataBank = this.workbenchDataBank;
-
+        _sharedObject.config = this.config;
 
 
 
@@ -153,7 +140,7 @@ class Visualiser {
 
 
 
-        //It attaches an event handler for the "select sample" menu
+        //Deletes collpasibles
         const myCollapsibles = document.getElementById('collapsibles');
         if (myCollapsibles != null) {
             myCollapsibles.textContent = '';
@@ -888,6 +875,16 @@ class Visualiser {
 
 
 
+
+
+
+    /**
+     * This refreshes the configuration
+     */
+    updateConfig() {
+    
+        this.config = _sharedObject.config;
+}
 
 
 }

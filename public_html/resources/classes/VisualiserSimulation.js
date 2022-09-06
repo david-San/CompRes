@@ -51,23 +51,26 @@ class VisualiserSimulation {
         this.densities = Array.from(this.simulation.keys());
 
         //This is the configuration for exporting plot drawings
-        this.config = {
-            responsive: true,
-            toImageButtonOptions: {
-                format: 'svg', // one of png, svg, jpeg, webp
-                filename: 'custom_image',
+        this.config = _sharedObject.config;
 
-                //Square illustrations
-                //height: 500, //Produce exports or the same size. Comment to have dynamic screen size
-                //width: 700, //Produce exports or the same size. Comment to have dynamic screen size
 
-                //Panoramic illustrations
-                height: 400, //Produce exports or the same size. Comment to have dynamic screen size
-                width: 1200, //Produce exports or the same size. Comment to have dynamic screen size
+        // this.config = {
+        //     responsive: true,
+        //     toImageButtonOptions: {
+        //         format: 'svg', // one of png, svg, jpeg, webp
+        //         filename: 'custom_image',
 
-                scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
-            }
-        };
+        //         //Square illustrations
+        //         height: 500, //Produce exports or the same size. Comment to have dynamic screen size
+        //         width: 700, //Produce exports or the same size. Comment to have dynamic screen size
+
+        //         //Panoramic illustrations
+        //         //height: 400, //Produce exports or the same size. Comment to have dynamic screen size
+        //         // width: 1200, //Produce exports or the same size. Comment to have dynamic screen size
+
+        //         scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+        //     }
+        // };
 
 
         this.colorway = ['#1e90ff', '#b22222', '#6f4d96', '#3d3b72', '#182844'];
