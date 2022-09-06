@@ -76,7 +76,7 @@ class Workbench {
             }
         };
 
- 
+
 
 
 
@@ -318,7 +318,7 @@ class Workbench {
 
 
         /**
-          * This private method creates the sample menus
+          * This private method creates the plot download options menu
           */
         var createDownloadOptionsMenu = function () {
 
@@ -378,25 +378,14 @@ class Workbench {
                 //Selected index
                 let selIndex = this.selectedIndex;
 
-                if (selIndex !== 0) {
+                //Finds the textSample corresponding to the selected value
+                let option = _plotDownloadOptions[selIndex];
 
+                // let x = window.confirm("Are you sure you want to load " + selIndex + "?");
 
-                    //It adjustes the index to use on an array
-                    selIndex = (selIndex > 0) ? selIndex - 1 : selIndex;
+                //Updates the interface with the options
+                plotDownloadOptionsMenuSetValues(option);
 
-                    //Finds the textSample corresponding to the selected value
-                    let option = _plotDownloadOptions[selIndex];
-
-                    // let x = window.confirm("Are you sure you want to load Sample " + sample.id + "?");
-                    let x = true;
-
-                    if (x) {
-
-                        //Updates the interface with the options
-                        plotDownloadOptionsMenuSetValues(option);
-                    }
-
-                }
             };
 
 
@@ -425,8 +414,8 @@ class Workbench {
 
 
             let myPlotOption1 = {
-                "id": 1,
-                "description": "Current Window size",
+                "id": 0,
+                "description": "Relative to Window size",
                 "width": "",
                 "height": ""
             }
@@ -443,12 +432,17 @@ class Workbench {
 
             let myPlotOption3 = {
                 //Produce exports for wide illustrations
-                "id": 1,
+                "id": 2,
                 "description": "Panoramic illustrations (1200x400)",
                 "width": 1200,
                 "height": 400
             }
             plotDownloadOptionsMenuPush(myPlotOption3);
+
+
+
+            //Set default
+            document.getElementById('plotDownloadOptions_dropdown').selectedIndex = 0;
 
         }
 

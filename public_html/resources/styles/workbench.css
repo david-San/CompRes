@@ -336,7 +336,7 @@ fieldset {
 .label {
 
     display: inline-block;
-    width: 200px;
+    width: 300px;
     text-align: right;
 
     font-family: sans-serif;
@@ -345,6 +345,8 @@ fieldset {
     /*Just for screen shots I used 35px*/
     /*font: 35px "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 }
+
+
 
 
 .legend {
