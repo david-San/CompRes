@@ -1073,7 +1073,7 @@ class Workbench {
  * 
  * 
  */
-    downloaDatasets() {
+    downloadDatasets() {
 
         const datasets = document.createElement('a');
         datasets.setAttribute("href", "/resources/datasets/datasets.zip");
