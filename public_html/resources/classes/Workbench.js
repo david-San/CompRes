@@ -1078,7 +1078,7 @@ class Workbench {
 
 
         const datasets = document.createElement('a');
-        datasets.setAttribute("href", "/resources/datasets/datasets.zip");
+        datasets.setAttribute("href", "../datasets/datasets.zip");
         datasets.setAttribute("download", "datasets.zip");
         datasets.setAttribute("target", "_blank");
         datasets.click();
