@@ -1052,6 +1052,38 @@ class Workbench {
 
 
 
+/**
+ * This prototype method download the datasets.
+ * 
+ * The datasets are basically text file in which there is a minified JSON object.
+ * They are large in size because they are plain text.
+ * I compressed them in zip and I am distributing them with the source code.
+ * 
+ * They have to be downloaded first, then unzip and then uploaded again because:
+ * - Compressed they are small but uncompressed are too large to be hosted in
+ *   github cheapily
+ * - I cannot uncompressed them on the fly in the webpage because thre are no
+ *   .zip uncompressors that work in Javascript at this moment.
+ * 
+ * Datasets are just a run of Sample 1, Sample 2 and Sample 3. 
+ * Due to the nature of the simulator, it is unlikely that you will get the same
+ * simulation if you run those samples again. So, in order to produce the article
+ * I needed to have a stable simulation to do the illustrations and analsyis. 
+ *
+ * 
+ * 
+ */
+    downloaDatasets() {
+
+        const datasets = document.createElement('a');
+        datasets.setAttribute("href", "/resources/datasets/datasets.zip");
+        datasets.setAttribute("download", "datasets.zip");
+        datasets.setAttribute("target", "_blank");
+        datasets.click();
+    }
+
+
+
 }
 
 
