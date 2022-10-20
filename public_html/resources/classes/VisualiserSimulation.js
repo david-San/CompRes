@@ -104,7 +104,7 @@ class VisualiserSimulation {
         this.drawResultsFlow();
         this.createCollapsibles();
         this.drawCollapsibles();
-        this.drawResults();
+        this.drawResultsSpeed();
     }
 
 
@@ -340,6 +340,24 @@ class VisualiserSimulation {
      * It is very good to see how a particular Movable speed up and slow down
      * during the simulation.
      * 
+     * This method drives all the speeds that happen in a frame.
+     * 
+     * e.g.
+     * 
+     *    0 . .  --0
+     *    . 1 .  --1
+     *    . . 2  --2
+     *    . . 3  --3
+     * 
+     * 
+     * It wil draw:
+     * 
+     *  4 +   
+     *  3 +     *
+     *  2 +   *
+     *  1 + *   
+     *  0 *-+-+-+-+-+-+--
+     *      1 2 3 4 5  
      * 
      * @param {Integer} density 
      */
@@ -390,6 +408,24 @@ class VisualiserSimulation {
      * 
      * It is very useful to see when the big traffic jams are formed
      * 
+     * This method drives all the speeds that happen in a frame.
+     * 
+     * e.g.
+     * 
+     *    0 . .  --0
+     *    . 1 .  --1
+     *    . . 2  --2
+     *    . . 3  --3
+     * 
+     * 
+     * It wil draw:
+     * 
+     *  4 +   
+     *  3 +     *
+     *  2 +   *
+     *  1 + *   
+     *  0 *-+-+-+-+-+-+--
+     *      1 2 3 4 5  
      * 
      * @param {Integer} density 
      */
@@ -453,25 +489,15 @@ class VisualiserSimulation {
 
 
 
+
+
     /**
-     * This method drives all the speeds that happen in a frame.
+     * This method drives box plot created with the speed of the vehiles.
      * 
-     * e.g.
-     * 
-     *    0 . .  --0
-     *    . 1 .  --1
-     *    . . 2  --2
-     *    . . 3  --3
-     * 
-     * 
-     * It wil draw:
-     * 
-     *  4 +   
-     *  3 +     *
-     *  2 +   *
-     *  1 + *   
-     *  0 *-+-+-+-+-+-+--
-     *      1 2 3 4 5  
+     * @param {*} density 
+     * @param {*} storage 
+     * @param {*} initialFramesToDiscard 
+     * @param {*} config 
      */
     drawCollapsiblePerformance(density, storage, initialFramesToDiscard, config) {
 
@@ -779,9 +805,9 @@ class VisualiserSimulation {
 
 
     /**
-     * This method draws all results of the simulation
+     * This method draws all Speed result of the simulation
      */
-    drawResults() {
+    drawResultsSpeed() {
 
         const simulations = this.simulation;
         const config = this.config;
@@ -863,9 +889,7 @@ class VisualiserSimulation {
             };
 
 
-
-
-     //Takes all defaults for layout
+            //Takes all defaults for layout
             const layout = {
                 // xaxis: {
                 //     range: [0, xNumber]
@@ -899,7 +923,6 @@ class VisualiserSimulation {
 
         const simulations = this.simulation;
         const config = this.config;
-        // const xNumber = simulations.size;
 
         const densities = this.densities;
 

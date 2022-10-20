@@ -22,8 +22,12 @@
  *   easier to move outside and check if there is a peformance gain.
  * 2021 Apr 14: Update
  * Finished cell idea implementation rather than graph.
- * 
+ * 2022 Oct 20: update
+ * Avergae speed added
  */
+
+
+
 
 /**
  * 
@@ -52,7 +56,7 @@
 /**
  * This object is used to share variables between pages
  */
- var _sharedObject = {};
+var _sharedObject = {};
 
 
 
@@ -68,7 +72,7 @@ class Visualiser {
 
 
 
-        
+
         // ========================================================================== //
         // Privileged attributes
         //Databank
@@ -223,7 +227,6 @@ class Visualiser {
 
             myLink.setAttribute("id", i);
             myLink.setAttribute("class", "link");
-
             myLink.setAttribute("dataKind", kind);
 
 
@@ -292,20 +295,23 @@ class Visualiser {
 
         //Common parameters
         const layout = {
-            // xaxis: {
-            //     range: [initialFramesToDiscard, framesNumber]
-            // },
             yaxis: {
                 range: [this.plotMinimumYValue, this.plotMaximumYValue]
             },
-            // colorway: myColorway,
             autosize: true,
             legend: {
                 orientation: "v",
                 traceorder: "normal"
             }
+            // xaxis: {
+            //     range: [initialFramesToDiscard, framesNumber]
+            // },
+            // colorway: myColorway,
             // title: 'Movable Velocity/Frame'
         };
+
+
+
 
 
 
@@ -330,7 +336,7 @@ class Visualiser {
         divResults.append(divControlFlowResults);
 
         const containerControlFlow = document.getElementById('performanceFlowControlResults');
-        this.drawResultsFlow(simulationsControl, containerControlFlow, layout, config );
+        this.drawResultsFlow(simulationsControl, containerControlFlow, layout, config);
 
 
 
@@ -398,7 +404,7 @@ class Visualiser {
         divResults.append(divAttackFlowRegionResults);
 
         const containerAttackFlowRegion = document.getElementById('performanceFlowRegionAttackResults');
-        this.drawResultsFlowRegion(containerAttackFlowRegion, attackRegionTraces, layout,config);
+        this.drawResultsFlowRegion(containerAttackFlowRegion, attackRegionTraces, layout, config);
 
 
 
@@ -474,98 +480,54 @@ class Visualiser {
 
 
 
-    }
+
+
+        //======================================================================
+        //Control Result: Average Speed
+        //Control
+        //Adding the legend to the DOM
+        const legendControlAverageSpeed = document.createElement("legend");
+        legendControlAverageSpeed.setAttribute("class", "legend");
+        legendControlAverageSpeed.innerHTML = "Control Result: Average Speed";
+
+        //Adding a panel to place results
+        const divControlAverageSpeedResult = document.createElement("div");
+        divControlAverageSpeedResult.setAttribute("id", "averageSpeedControlResults");
+        divControlAverageSpeedResult.setAttribute("class", "panelPerformance");
+
+        //Arming the DOM
+        divResults.append(legendControlAverageSpeed);
+        divResults.append(divControlAverageSpeedResult);
+
+        const containerControlAverageSpeed = document.getElementById('averageSpeedControlResults');
+        this.drawResultsSpeedAverage(simulationsControl, containerControlAverageSpeed, config);
+
+
+
+
+        //Attack Result: Average Speed
+        //Attack
+        //Adding the legend to the DOM
+        const legendAttackAverageSpeed = document.createElement("legend");
+        legendAttackAverageSpeed.setAttribute("class", "legend");
+        legendAttackAverageSpeed.innerHTML = "Attack Result: Average Speed";
+
+        //Adding a panel to place results
+        const divAttackAverageSpeedResult = document.createElement("div");
+        divAttackAverageSpeedResult.setAttribute("id", "averageSpeedAttackResults");
+        divAttackAverageSpeedResult.setAttribute("class", "panelPerformance");
+
+        //Arming the DOM
+        divResults.append(legendAttackAverageSpeed);
+        divResults.append(divAttackAverageSpeedResult);
+
+        const containerAttackAverageSpeed = document.getElementById('averageSpeedAttackResults');
+        this.drawResultsSpeedAverage(simulationsAttack, containerAttackAverageSpeed, config);
 
 
 
 
 
-    /**
-     * This method draws all results of the simulation
-     */
-    drawResult(simulations, container) {
-
-        const myTotalAverageX = new Array();
-        const myTotalAverageY = new Array();
-
-        //Traversing the map to the get all densities. 
-        //Densities are used as key. Simulation are values
-        for (const [density, simulation] of simulations) {
-
-            const config = this.config;
-            //Traverse the Map (frame is key, road is value) to get all speeds
-            //Order is not guaranteed, but it is not important
-
-            let myInitialFramesToDiscard = simulation.initialFramesToDiscard;
-
-            //The code has to be constructed this way so it is possible to avoid the
-            //first myInitialFramesToDiscard. Enumerators do not allow to 
-            //jump myInitialFramesToDiscard
-            let frames = Array.from(simulation.frames.keys());
-            let top = frames.length;
-  
-
-            for (let i = myInitialFramesToDiscard; i < top; i++) {
-
-                let road = simulation.frames.get(frames[i]);
-
-                for (let i = 0; i < road.length; i++) {
-
-                    if ((road[i] !== null) && (road[i].constructor === Object)) {
-                        let myMovable = road[i];
-
-                        //Creating dataset for total box plot
-                        myTotalAverageX.push(density);
-                        myTotalAverageY.push(myMovable.velocity);
-                    }
-                }
-            }
-
-
-            const trace = {
-                x: myTotalAverageX,
-                y: myTotalAverageY,
-                // mode: 'markers',
-                type: 'box',
-                name: 'Velocity',
-                boxmean: true,
-                // boxpoints: 'Outliers',
-                // boxpoints: 'all',
-                // jitter: 0.3,
-                // pointpos: -1.8,
-                // marker: {
-                //     size: 5
-                // }
-            };
-
-
-
-
-
-
-            const layout = {
-                // xaxis: {
-                //     range: [initialFramesToDiscard, framesNumber]
-                // },
-                yaxis: {
-                    range: [this.plotMinimumYValue, this.plotMaximumYValue]
-                },
-                // colorway: myColorway,
-                autosize: true,
-                legend: {
-                    orientation: "v",
-                    traceorder: "normal"
-                }
-                // title: 'Movable Velocity/Frame'
-            };
-
-            
-
-
-
-            const data = [trace];
-            Plotly.newPlot(container, data, layout, config);
-        }
     }
 
 
@@ -877,14 +839,88 @@ class Visualiser {
 
 
 
+    /**
+     * This method draws speed average of each iteration.
+     * 
+     * Each iteration of a simulation has an average speed.
+     * This method shows the average speed of those average speeds. 
+     * 
+     */
+    drawResultsSpeedAverage(simulations, container, traces, layout, config) {
+
+        const topSimulations = simulations.size;
+
+        const myTotalAverageX = new Array();
+        const myTotalAverageY = new Array();
+
+        //Producing dataset for all series
+        for (let i = 0; i < topSimulations; i++) {
+
+            //Getting each iteration of a simulation
+            let simulation = simulations.get(i);
+            let densities = Array.from(simulation.keys());
+
+            let topDensities = densities.length;
+
+            for (let j = 0; j < topDensities; j++) {
+
+                //Traversing all densities in a simulation
+                let averageSpeed = simulation.get(densities[j]).averageSpeed;
+
+                //Creating dataset for total box plot
+                //Saves the value with its respective density
+                myTotalAverageX.push(densities[j]);
+                myTotalAverageY.push(averageSpeed);
+            }
+        }
+
+
+
+
+        //Overriding layout parameters with a different plot
+        //Common parameters
+        const layoutBox = {
+            yaxis: {
+                range: [0, 5]
+            },
+            autosize: true,
+            legend: {
+                orientation: "v",
+                traceorder: "normal"
+            }
+        };
+
+
+        const trace = {
+            colorway: this.colorway,
+            x: myTotalAverageX,
+            y: myTotalAverageY,
+            type: 'box',
+            name: 'Velocity',
+            boxmean: true
+        };
+
+        const data = [trace];
+
+        Plotly.newPlot(container, data, layoutBox, config);
+
+
+    }
+
+
+
+
 
     /**
      * This refreshes the configuration
      */
     updateConfig() {
-    
+
         this.config = _sharedObject.config;
-}
+    }
+
+
+
 
 
 }

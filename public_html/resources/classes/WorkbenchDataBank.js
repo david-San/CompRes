@@ -70,6 +70,14 @@
  *                |-------Density i+1
  *                |-------Density ...
  *                |-------Density n
+ *                     |-------Frames
+ *                     |-------totalMovablessCrossedFinishLine
+ *                     |-------totalMovablesCrossedFinishLinePerFrame
+ *                     |-------numberOfMovables
+ *                     |-------numberOfFrames
+ *                     |-------averageSpeed
+ *                     |-------totalResilienceMax
+ *                     |-------totalResilienceMin
  *              
  * I decided to use an object because it would be easier to document what
  * the results of the simulator are. 
