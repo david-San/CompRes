@@ -438,12 +438,21 @@ class Simulator {
                 }
             }
 
+
+
+
+
             let averageSpeed = totalSpeedOfAllMovables / totalNumberOfMovables;
+
+
+
+
 
             totalAverageSpeed = totalAverageSpeed + averageSpeed;
             totalMaxExpected = totalMaxExpected + speedHighLimit;
             totalMinExpected = totalMinExpected + speedLowLimit;
         }
+
 
         const resilienceSpeedTotalMax = totalAverageSpeed / totalMaxExpected;
         const resilienceSpeedTotalMin = totalAverageSpeed / totalMinExpected;
@@ -451,7 +460,7 @@ class Simulator {
 
         const totalMovablesCrossedFinishLinePerFrame = totalMovablesCrossedFinishLine / numberOfFrames;
 
-        const speedAverage = totalAverageSpeed / numberOfFrames;
+        const speedAverage = totalAverageSpeed / (numberOfFrames - initialFramesToDiscard);
 
 
 

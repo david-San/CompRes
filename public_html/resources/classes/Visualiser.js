@@ -528,6 +528,34 @@ class Visualiser {
 
 
 
+
+
+        //======================================================================
+        //Results Combined: Average Speed
+        //Both
+        //Adding the legend to the DOM
+        const legendCombinedAverageSpeed = document.createElement("legend");
+        legendCombinedAverageSpeed.setAttribute("class", "legend");
+        legendCombinedAverageSpeed.innerHTML = "Combined Result: Average Speed - Control vs Attack";
+
+        //Adding a panel to place results
+        const divCombinedAverageSpeedResults = document.createElement("div");
+        divCombinedAverageSpeedResults.setAttribute("id", "performanceCombinedAverageSpeedResults");
+        divCombinedAverageSpeedResults.setAttribute("class", "panelPerformance");
+
+        //Arming the DOM
+        divResults.append(legendCombinedAverageSpeed);
+        divResults.append(divCombinedAverageSpeedResults);
+
+        const containerCombinedAverageSpeed = document.getElementById('performanceCombinedAverageSpeedResults');
+
+        this.drawResultsSpeedAverageCombined(containerCombinedAverageSpeed, config);
+
+
+
+
+
+
     }
 
 
@@ -836,7 +864,7 @@ class Visualiser {
     }
 
 
-
+        
 
 
     /**
@@ -846,7 +874,7 @@ class Visualiser {
      * This method shows the average speed of those average speeds. 
      * 
      */
-    drawResultsSpeedAverage(simulations, container, traces, layout, config) {
+    drawResultsSpeedAverage(simulations, container, config) {
 
         const topSimulations = simulations.size;
 
@@ -918,6 +946,131 @@ class Visualiser {
 
         this.config = _sharedObject.config;
     }
+
+
+
+
+
+    /**
+     * This method creates only a data set of the speed average of a simulation.
+     * I need to call this procedure twice tocreate two datasets
+     * One of the is for the control, the other is for the attack
+     * 
+     * @param {Map} simulations 
+     * @returns Array
+     */
+    createResultsSpeedAverageCombined(simulations, label) {
+
+        const topSimulations = simulations.size;
+
+        const myTotalAverageX = new Array();
+        const myTotalAverageY = new Array();
+
+        //Producing dataset for all series
+        for (let i = 0; i < topSimulations; i++) {
+
+            //Getting each iteration of a simulation
+            let simulation = simulations.get(i);
+            let densities = Array.from(simulation.keys());
+
+            let topDensities = densities.length;
+
+            for (let j = 0; j < topDensities; j++) {
+
+                //Traversing all densities in a simulation
+                let averageSpeed = simulation.get(densities[j]).averageSpeed;
+
+                //Creating dataset for total box plot
+                //Saves the value with its respective density
+                myTotalAverageX.push(densities[j]);
+                myTotalAverageY.push(averageSpeed);
+            }
+        }
+
+        const trace = {
+            colorway: this.colorway,
+            x: myTotalAverageX,
+            y: myTotalAverageY,
+            type: 'box',
+            name: label,
+            boxmean: true
+        };
+
+        const data = [trace];
+
+        return data
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * This method draws speed average of each iteration.
+     * 
+     * Each iteration of a simulation has an average speed.
+     * This method shows the average speed of those average speeds. 
+     * 
+     */
+    drawResultsSpeedAverageCombined(container, config) {
+
+        //Gathering Data
+
+        const simulationsControl = this.workbenchDataBank.control.simulations;
+        const simulationsAttack = this.workbenchDataBank.attack.simulations;
+
+        let dataControl = this.createResultsSpeedAverageCombined(simulationsControl, "Control");
+        let dataAttack = this.createResultsSpeedAverageCombined(simulationsAttack,"Attack");
+
+        let data = new Array();
+
+        //Combining everything into one
+        data = data.concat(dataControl);
+        data = data.concat(dataAttack);
+
+
+        //Overriding layout parameters with a different plot
+        //Common parameters
+        const layoutBox = {
+            yaxis: {
+                range: [0, 5]
+            },
+            autosize: true,
+            legend: {
+                orientation: "v",
+                traceorder: "normal"
+            }
+        };
+
+        Plotly.newPlot(container, data, layoutBox, config);
+    }
+
+
+
+
 
 
 
