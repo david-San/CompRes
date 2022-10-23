@@ -221,7 +221,7 @@ h3 {
 
 div.scroll {
     float: left;
-    height: 65px;
+    height: 190px;
     overflow-x: hidden;
     overflow-y: auto;
     -ms-overflow-x: auto;
@@ -234,7 +234,7 @@ div.scroll {
 
 
 
-    /* border: 1px solid lightgray;  */
+    border: 1px solid lightgray; 
 
 /* white-space: nowrap; */
      /* padding: 5px; */
