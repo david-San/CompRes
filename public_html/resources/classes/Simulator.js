@@ -47,8 +47,16 @@ class Simulator {
      * Road length is the size of the road. 
      * 
      * 
-     * @param {*} numberOfCells 
-     * @param {*} density 
+     * @param {int} numberOfCells 
+     * @param {float} density
+     * @param {int} initialFramesToDiscard
+     * @param {float} performanceLowLimit
+     * @param {float} performanceHighLimit
+     * @param {float} probabilityRandomBreak
+     * @param {boolean} probabilityRandomBreakMultiple
+     * @param {array} probabilityRandomBreakArray
+     * @param {int} velocityMax
+     * @param {int} movablesHacked
      */
     constructor(
         numberOfCells,
@@ -57,6 +65,8 @@ class Simulator {
         performanceLowLimit,
         performanceHighLimit,
         probabilityRandomBreak,
+        probabilityRandomBreakMultiple,
+        probabilityRandomBreakArray,
         velocityMax,
         movablesHacked) {
 
@@ -72,6 +82,8 @@ class Simulator {
         this.speedLowLimit = performanceLowLimit;
         this.speedHighLimit = performanceHighLimit;
         this.probabilityRandomBreak = probabilityRandomBreak;
+        this.probabilityRandomBreakMultiple = probabilityRandomBreakMultiple;
+        this.probabilityRandomBreakArray = probabilityRandomBreakArray;
         this.velocityMax = velocityMax;
         this.movablesHacked = movablesHacked;
 
@@ -167,7 +179,8 @@ class Simulator {
 
                 if (road[randomPosition] === undefined) {
 
-                    let myStakeholder = new Stakeholder(this.probabilityRandomBreak, this.velocityMax);
+                    let myStakeholder = new Stakeholder(
+                        this.velocityMax);
 
                     let myMovable = new Movable(id, randomPosition, myStakeholder, kind);
 
@@ -310,8 +323,16 @@ class Simulator {
                 let nextMovableDistance = this.findDistanceToNextMovable(i);
 
                 let myMovable = cells[i];
+                
+                //Take default probability of random break
+                let myProbabilityRandomBreak = this.probabilityRandomBreak;
 
-                myMovable.stakeholderDecide(nextMovableDistance);
+                //If multiple random break, then override valur
+                if (this.probabilityRandomBreakMultiple === true) {
+                    myProbabilityRandomBreak = this.probabilityRandomBreakArray[i];
+                }
+                
+                myMovable.stakeholderDecide(nextMovableDistance, myProbabilityRandomBreak);
 
                 let myMovablePosition = myMovable.x;
 

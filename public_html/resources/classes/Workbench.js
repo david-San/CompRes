@@ -698,14 +698,17 @@ class Workbench {
 
         //Control
         const controlNumberOfSimulations = this.workbenchDataBank.control.numberOfSimulations;
-        const controlProbabilityRandomBreak = this.workbenchDataBank.control.probabilityRandomBreak;
         const controlNumberOfHackedMovables = this.workbenchDataBank.control.numberOfHackedMovables;
-
+        const controlProbabilityRandomBreak = this.workbenchDataBank.control.probabilityRandomBreak;
+        const controlProbabilityRandomBreakMultiple = this.workbenchDataBank.control.probabilityRandomBreakMultiple;
+        const controlProbabilityRandomBreakArray = this.workbenchDataBank.control.probabilityRandomBreakArray;
 
         //Attack
         const attackNumberOfSimulations = this.workbenchDataBank.attack.numberOfSimulations;
-        const attackProbabilityRandomBreak = this.workbenchDataBank.attack.probabilityRandomBreak;
         const attackNumberOfHackedMovables = this.workbenchDataBank.attack.numberOfHackedMovables;
+        const attackProbabilityRandomBreak = this.workbenchDataBank.attack.probabilityRandomBreak;
+        const attackProbabilityRandomBreakMultiple = this.workbenchDataBank.attack.probabilityRandomBreakMultiple;
+        const attackProbabilityRandomBreakArray = this.workbenchDataBank.attack.probabilityRandomBreakArray;
 
 
 
@@ -721,8 +724,10 @@ class Workbench {
             performanceLowLimit,
 
             controlNumberOfSimulations,
+            controlNumberOfHackedMovables,
             controlProbabilityRandomBreak,
-            controlNumberOfHackedMovables
+            controlProbabilityRandomBreakMultiple,
+            controlProbabilityRandomBreakArray
         )
 
         const myAttackSimulation = this.createSimulation(
@@ -737,8 +742,10 @@ class Workbench {
             performanceLowLimit,
 
             attackNumberOfSimulations,
+            attackNumberOfHackedMovables,
             attackProbabilityRandomBreak,
-            attackNumberOfHackedMovables
+            attackProbabilityRandomBreakMultiple,
+            attackProbabilityRandomBreakArray
         )
 
 
@@ -771,8 +778,10 @@ class Workbench {
         performanceLowLimit,
 
         numberOfSimulations,
+        numberOfHackedMovables,
         probabilityRandomBreak,
-        numberOfHackedMovables) {
+        probabilityRandomBreakMultiple,
+        probabilityRandomBreakArray) {
 
 
         //New simlations map to store all runnings
@@ -814,6 +823,8 @@ class Workbench {
                     performanceLowLimit,
                     performanceHighLimit,
                     probabilityRandomBreak,
+                    probabilityRandomBreakMultiple,
+                    probabilityRandomBreakArray,
                     movableMaxSpeed,
                     numberOfHackedMovables
                 );

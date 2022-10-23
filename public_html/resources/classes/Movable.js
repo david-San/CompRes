@@ -223,12 +223,13 @@ class Movable {
      * This method decides what do with the movable, receives distance to the next 
      * movable as parameter and return the new position of the movable.
      * 
-     * @param {*} distanceToNextmovable 
+     * @param {int} nextmovableDistance 
+     * @param {int} currentCell 
      * @returns movable
      */
-    stakeholderDecide(nextmovableDistance) {
+    stakeholderDecide(nextmovableDistance, currentCell) {
 
-        let myAnswer = this.stakeholder.decide(nextmovableDistance, this.velocity);
+        let myAnswer = this.stakeholder.decide(nextmovableDistance, this.velocity, currentCell);
 
         this.velocity = myAnswer.velocity;
         this.reposition();
