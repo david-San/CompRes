@@ -514,13 +514,48 @@ class Workbench {
 
         //Control simulations only
         const controlNumberOfSimulations = parseFloat(document.getElementById("controlNumberOfSimulations").value);
-        const controlProbabilityRandomBreak = parseFloat(document.getElementById("controlProbabilityRandomBreak").value);
         const controlNumberOfHackedMovables = parseFloat(document.getElementById("controlMovablesHacked").value);
+
+        const controlProbabilityRanDomBreakUniform = document.getElementById("controlProbabilityRandomBreakUniform").checked;
+        const controlProbabilityRanDomBreakMultiple = document.getElementById("controlProbabilityRandomBreakMultiple").checked;
+        const controlProbabilityRandomBreak = parseFloat(document.getElementById("controlProbabilityRandomBreak").value);
+
 
         //Attack simulations only
         const attackNumberOfSimulations = parseFloat(document.getElementById("attackNumberOfSimulations").value);
-        const attackProbabilityRandomBreak = parseFloat(document.getElementById("attackProbabilityRandomBreak").value);
         const attackNumberOfHackedMovables = parseFloat(document.getElementById("attackMovablesHacked").value);
+
+
+        const attackProbabilityRandomBreakUniform = document.getElementById("attackProbabilityRandomBreakUniform").checked;
+        const attackProbabilityRandomBreakMultiple = document.getElementById("attackProbabilityRandomBreakMultiple").checked;
+        const attackProbabilityRandomBreak = parseFloat(document.getElementById("attackProbabilityRandomBreak").value);
+
+
+
+        const controlProbabilityRandomBreakArray = [];
+        const attackProbabilityRandomBreakArray = [];
+
+        //Read Control Multiple probability Random Break
+        if (controlProbabilityRanDomBreakMultiple === true) {
+
+            for (let i = 0; i < numberOfCells; i++) {
+                let myInputValue = parseFloat(document.getElementById("controlProbabilityCell" + i).value);
+                controlProbabilityRandomBreakArray.push(myInputValue);
+            }
+        }
+
+
+
+        //Read Attack Multiple probability Random Break
+        if (attackProbabilityRandomBreakMultiple === true) {
+
+            for (let i = 0; i < numberOfCells; i++) {
+                let myInputValue = parseFloat(document.getElementById("attackProbabilityCell" + i).value);
+                attackProbabilityRandomBreakArray.push(myInputValue);
+            }
+        }
+
+
 
 
 
@@ -538,12 +573,21 @@ class Workbench {
             movablePerformanceHighLimit,
             movablePerformanceLowLimit,
             controlNumberOfSimulations,
-            controlProbabilityRandomBreak,
             controlNumberOfHackedMovables,
+            controlProbabilityRandomBreak,
+            controlProbabilityRanDomBreakMultiple,
+            controlProbabilityRandomBreakArray,
             attackNumberOfSimulations,
+            attackNumberOfHackedMovables,
             attackProbabilityRandomBreak,
-            attackNumberOfHackedMovables);
+            attackProbabilityRandomBreakMultiple,
+            attackProbabilityRandomBreakArray);
     }
+
+
+
+
+
 
 
 
@@ -574,13 +618,54 @@ class Workbench {
 
         //Control simulations only
         document.getElementById("controlNumberOfSimulations").value = this.workbenchDataBank.control.numberOfSimulations;
-        document.getElementById("controlProbabilityRandomBreak").value = this.workbenchDataBank.control.probabilityRandomBreak;
         document.getElementById("controlMovablesHacked").value = this.workbenchDataBank.control.numberOfHackedMovables;
+        document.getElementById("controlProbabilityRandomBreak").value = this.workbenchDataBank.control.probabilityRandomBreak;
+        document.getElementById("controlProbabilityRandomBreakMultiple").checked = this.workbenchDataBank.control.probabilityRandomBreakMultiple;
+
+        //Writing multiple probability random break control fields
+        if (this.workbenchDataBank.control.probabilityRandomBreakMultiple === true) {
+            const container = document.getElementById("controlProbabilityMultipleValue");
+            const numberOfCells = this.workbenchDataBank.common.numberOfCells;
+            const uniformValue = this.workbenchDataBank.control.probabilityRandomBreak;
+            const fieldNamePrefix = "controlProbabilityCell"
+            const probabilityRandomBreakArray = this.workbenchDataBank.control.probabilityRandomBreakArray;
+
+            this.createMultipleProbabilityRandomBreakInputFields(
+                container,
+                numberOfCells,
+                uniformValue,
+                fieldNamePrefix,
+                probabilityRandomBreakArray);
+        }
+
+
+
+
 
         //Attack simulations only
         document.getElementById("attackNumberOfSimulations").value = this.workbenchDataBank.attack.numberOfSimulations;
-        document.getElementById("attackProbabilityRandomBreak").value = this.workbenchDataBank.attack.probabilityRandomBreak;
         document.getElementById("attackMovablesHacked").value = this.workbenchDataBank.attack.numberOfHackedMovables;
+        document.getElementById("attackProbabilityRandomBreak").value = this.workbenchDataBank.attack.probabilityRandomBreak;
+
+        document.getElementById("attackProbabilityRandomBreakMultiple").checked = this.workbenchDataBank.attack.probabilityRandomBreakMultiple;
+
+        //Writing multiple probability random break attack fields
+        if (this.workbenchDataBank.attack.probabilityRandomBreakMultiple === true) {
+            const container = document.getElementById("attackProbabilityMultipleValue");
+            const numberOfCells = this.workbenchDataBank.common.numberOfCells;
+            const uniformValue = this.workbenchDataBank.attack.probabilityRandomBreak;
+            const fieldNamePrefix = "attackProbabilityCell";
+            const probabilityRandomBreakArray = this.workbenchDataBank.attack.probabilityRandomBreakArray;
+
+            this.createMultipleProbabilityRandomBreakInputFields(
+                container,
+                numberOfCells,
+                uniformValue,
+                fieldNamePrefix,
+                probabilityRandomBreakArray);
+        }
+
+
 
     }
 
@@ -1052,27 +1137,27 @@ class Workbench {
 
 
 
-/**
- * This prototype method download the datasets.
- * 
- * The datasets are basically text file in which there is a minified JSON object.
- * They are large in size because they are plain text.
- * I compressed them in zip and I am distributing them with the source code.
- * 
- * They have to be downloaded first, then unzip and then uploaded again because:
- * - Compressed they are small but uncompressed are too large to be hosted in
- *   github cheapily
- * - I cannot uncompressed them on the fly in the webpage because thre are no
- *   .zip uncompressors that work in Javascript at this moment.
- * 
- * Datasets are just a run of Sample 1, Sample 2 and Sample 3. 
- * Due to the nature of the simulator, it is unlikely that you will get the same
- * simulation if you run those samples again. So, in order to produce the article
- * I needed to have a stable simulation to do the illustrations and analsyis. 
- *
- * 
- * 
- */
+    /**
+     * This prototype method download the datasets.
+     * 
+     * The datasets are basically text file in which there is a minified JSON object.
+     * They are large in size because they are plain text.
+     * I compressed them in zip and I am distributing them with the source code.
+     * 
+     * They have to be downloaded first, then unzip and then uploaded again because:
+     * - Compressed they are small but uncompressed are too large to be hosted in
+     *   github cheapily
+     * - I cannot uncompressed them on the fly in the webpage because thre are no
+     *   .zip uncompressors that work in Javascript at this moment.
+     * 
+     * Datasets are just a run of Sample 1, Sample 2 and Sample 3. 
+     * Due to the nature of the simulator, it is unlikely that you will get the same
+     * simulation if you run those samples again. So, in order to produce the article
+     * I needed to have a stable simulation to do the illustrations and analsyis. 
+     *
+     * 
+     * 
+     */
     downloadDatasets() {
 
 
@@ -1083,6 +1168,70 @@ class Workbench {
         datasets.setAttribute("target", "_blank");
         datasets.click();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * This method creates as much entry fields as it is indicated in the 
+     * number of cells input field and adds it to the scrollable panel.
+     * 
+     * This method is used in two ways.
+     * First, when interacting with the interface and when loading a saved
+     * simulation into the program
+     * 
+         * 
+         * @param {DOM} container 
+         */
+    createMultipleProbabilityRandomBreakInputFields(container, numberOfCells, uniformValue, fieldNamePrefix, probabilityRandomBreakArray) {
+
+        //Removing previous input elments
+        container.innerHTML = '';
+
+        for (let i = 0; i < numberOfCells; i++) {
+
+            let mySpan = document.createElement("span");
+            mySpan.setAttribute("class", "labelScroll");
+            mySpan.innerHTML = i;
+
+            let myInputField = document.createElement("input");
+            myInputField.setAttribute("class", "input");
+            myInputField.setAttribute("type", "text");
+            myInputField.setAttribute("id", fieldNamePrefix + i);
+
+            //Prefilling the input field
+
+            if (typeof probabilityRandomBreakArray !== 'undefined') {
+                myInputField.value = probabilityRandomBreakArray[i];
+            } else {
+                myInputField.value = uniformValue;
+            }
+
+            //Adding the field to the scrollable element
+            container.append(mySpan);
+            container.append(myInputField);
+        }
+
+        //Display panel
+        container.style.display = "block";
+    }
+
 
 
 

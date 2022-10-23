@@ -28,6 +28,13 @@ h1 {
     margin-bottom: 1cm;
 }
 
+.spaceHorizontal {
+
+    margin-left:240px;
+
+    /* margin-bottom: 1cm; */
+
+}
 
 img {
     margin-top: 0.5cm;
@@ -36,16 +43,34 @@ img {
 
 
 h2 {
-    /*margin-top:0cm;*/
-    /* font-family: sans-serif; */
+
     padding-left: 10px;
     font-family: sans-serif;
     font-size: 18px;
     width: 250px;
     height: 35px;
-    /*    float:top;*/
+
+    /*float:top;*/
     /*height:16px;*/
+    /*margin-top:0cm;*/
+    /* font-family: sans-serif; */
 }
+
+h3 {
+
+    padding-left: 10px;
+    font-family: sans-serif;
+    font-size: 12px;
+    width: 300px;
+    /* height: 35px; */
+
+    /*float:top;*/
+    /*height:16px;*/
+    /*margin-top:0cm;*/
+    /* font-family: sans-serif; */
+}
+
+
 
 
 #panelCombined {
@@ -98,7 +123,9 @@ h2 {
 
 
 
-
+#clear {
+    clear: both;
+}
 
 
 
@@ -127,9 +154,7 @@ h2 {
 }
 
 
-#clear {
-    clear: both;
-}
+
 
 
 
@@ -155,6 +180,29 @@ h2 {
 
 
 
+#panelWorkbenchInputCenter {
+
+    flex-grow: 1;
+    float: left;
+    width: auto;
+    height: auto;
+    padding: 2px;
+
+    /* margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px; */
+
+    border: 1px solid lightgray;
+
+    /* margin-left: 10px; */
+    /* padding-left: 0.75em; */
+    /* padding-right: 0.75em; */
+
+}
+
+
+
+
 
 .panelCenter {
     font-family: sans-serif;
@@ -170,6 +218,37 @@ h2 {
     /* border: 1px solid lightgray; */
 }
 
+
+div.scroll {
+    float: left;
+    height: 65px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -ms-overflow-x: auto;
+    -ms-overflow-y: hidden;
+    
+    margin-left: 195px;
+   
+    width: 125px;
+    display:none;
+
+
+
+    /* border: 1px solid lightgray;  */
+
+/* white-space: nowrap; */
+     /* padding: 5px; */
+    /* display:flex;  */    
+    /* overflow-x: auto;
+    overflow-y: hidden; */
+    /* position: relative; */
+    /* background-color: #fed9ff; */
+    /* width: 100px; */
+    /* text-align: center; */
+    /* white-space: 5px; */
+
+
+  }
 
 
 .panelPerformance {
@@ -262,6 +341,25 @@ h2 {
     font-family: sans-serif;
 }
 
+
+.inputRadio {
+    width: 5px;
+
+    display: inline-block;
+
+    /* font-family: sans-serif; */
+
+    /* display: inline-block;
+    width: 180px;
+    text-align: right; */
+
+    /* font-family: sans-serif; */
+    /* font-size: 12px; */
+
+
+
+}
+
 fieldset {
     display: block;
     margin-left: 2px;
@@ -333,11 +431,38 @@ fieldset {
 
 
 
+
+
+
 .label {
 
     display: inline-block;
-    width: 300px;
+    width: 180px;
     text-align: right;
+
+    font-family: sans-serif;
+    font-size: 12px;
+
+}
+
+
+
+.radio {
+
+    display: inline-block;
+    width: 180px;
+    text-align: left;
+
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+
+.labelRadio {
+
+    display: inline-block;
+    width: 50px;
+    text-align: left;
 
     font-family: sans-serif;
     font-size: 12px;
@@ -345,6 +470,39 @@ fieldset {
     /*Just for screen shots I used 35px*/
     /*font: 35px "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 }
+
+
+
+.labelScroll {
+
+    display: inline-block;
+    width: 50px;
+    text-align: right;
+
+    padding-right: 5px;
+
+    font-family: sans-serif;
+    font-size: 12px;
+
+    /*Just for screen shots I used 35px*/
+    /*font: 35px "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+}
+
+
+
+
+
+
+.labelRight {
+
+    display: inline-block;
+    width: 180px;
+    text-align: right;
+
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
 
 
 

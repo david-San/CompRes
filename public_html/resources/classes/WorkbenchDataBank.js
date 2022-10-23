@@ -37,7 +37,7 @@
  * - WorkbenchDataBank
  *   |---Common
  *       |------Number of Cells
- *       |------Frames Number
+ *       |------Number of Frames
  *       |------Initial Frames to discard
  *       |------Density Init
  *       |------Density End
@@ -45,8 +45,18 @@
  *       |------Plot Maximum Y Value 
  *       |------Plot Minimum Y Value
  *       |------Movable Max Speed
- *       |------Movable Performance Low Limit
- *       |------Movable Performance High Limit 
+ *       |------Movable Performance High Limit
+ *       |------Movable Performance Low Limit 
+ *       |------controlNumberOfSimulations
+ *       |------controlNumberOfHackedMovables
+ *       |------controlProbabilityRandomBreak
+ *       |------controlArrayProbabilityRandomBreak
+ *       |------attackNumberOfSimulations
+ *       |------attackNumberOfHackedMovables
+ *       |------attackProbabilityRandomBreak
+ *       |------attackArrayProbabilityRandomBreak
+ * 
+ * 
  *   |---Control
  *       |------Simulations 
  *           |-------SimulationDensities
@@ -64,8 +74,8 @@
  *                     |-------totalResilienceMin
  * 
  *   |---Attack
- *       |------Iterations
- *           |-------Simulations
+ *       |------Simulations
+ *           |-------SimulationDensities
  *                |-------Density i
  *                |-------Density i+1
  *                |-------Density ...
@@ -88,13 +98,44 @@
  *   about 3.5 meters long, so it would fit an average car. This consideration
  *   however, is not really important for this synthetic problem.
  * 
- * * Density:
- *   This value express how many movables commodities would be located in the road.
- *   The minimum is 0 and the maxmum should be 1.
- *   The simulator calculates how many cars is going to place to achieve 
- *   the density specified.
+ * * Numbers of Frames:
+ *   This is the amount of "frames" that will have created. 
+ *   Each frame is the equivalent of a picture of the road at a given time
  * 
- * * performanceLowLimit
+ * * Initial Frames to Discard:
+ *   This is the the number of frames that are not considered for the statistics.
+ *   This are frames in which movables are not yet up to the scenario we want
+ *   to simulate, so you can discard them. This are the frames in which vehicles
+ *   are accelerating.
+ * 
+ * * Density Init/End/Steps:
+ *   Density express how many movables commodities would be located in the road.
+ *   The minimum is 0 and the maxmum should be 1. 
+ *   The simulator calculates how many cars is going to place to achieve 
+ *   the specified density.
+ *   The software simulate many densities. 
+ *   - Init is about the initial density to be simulated.
+ *   - End is the final density that will be simulated.
+ *   - Steps is about how many densities between the Init and End.
+ * 
+ * * Plot Maximum Y Value:
+ *   This is the maximum value of the Y axis of the plots that are produced.
+ *   Typically 100
+ * 
+ * * Plot Minimum Y Value:
+ *   This is the minimum value of the Y axis of the plots that are produced.
+ *   Typically 0.
+ * 
+ * * Movable Max Speed:
+ *   Max performance of the movable. Usually 5
+ * 
+ * * movablePerformacenHighLimit
+ *   This value specifies the maximum value for the system to be effective.
+ *   This is the resilience frontier.
+ *   The maximum value should be similar to the upp er box graphics frontier
+ *   when there are no adversarial events.
+ * 
+ * * MovablePerformanceLowLimit
  *   This value specifies what should be the minimum value for the system to 
  *   be effective. This is the resilience frontier.
  *   We established that bellow this number the system is not useful, safe
@@ -107,11 +148,63 @@
  *   without any adversarial events, and then used that value as the minimum
  *   acceptable.
  * 
- * * performacenHighLimit
- *   This value specifies the maximum value for the system to be effective.
- *   This is the resilience frontier.
- *   The maximum value should be similar to the upp er box graphics frontier
- *   when there are no adversarial events.
+ * * controlNumerOfSimulations
+ *   How many simulations will be done. This are iterations of the same
+ *   simulation
+ * 
+ * * controlNumberOfHackedVehicles
+ *   This parameter tells how many vehicles are  having problems in decision
+ *   making.
+ * 
+ * * controlProbablityRandomBreak
+ *   This value models the probability of breaking, also known as p.
+ *   p=0 means there are no probability of breaking, p=1 means that will be
+ *   breaking.
+ *   This parameter is used when there is a single value for the whole road. 
+ * 
+ *  * controlProbabilityRandomBreakMultiple
+ *   This saves the value of a radio button that indicates if the simulation
+ *   uses uniform value or multiple values. I am saving just multiple values
+ *   since unifor is the opposite. 
+ * 
+ * * controlProbablityRandomBreakArray
+ *   This is an array of values or probability of breaking, also known as p.
+ *   p=0 means there are no probability of breaking, p=1 means that will be
+ *   breaking.
+ *   This parameter is used when there are different p for each cell on the 
+ *   road.
+ * 
+ * * attackNumerOfSimulations
+ *   How many simulations will be done. This are iterations of the same
+ *   simulation
+ * 
+ * * attackNumberOfHackedVehicles
+ *   This parameter tells how many vehicles are  having problems in decision
+ *   making.
+ * 
+ * * attackProbablityRandomBreak
+ *   This value models the probability of breaking, also known as p.
+ *   p=0 means there are no probability of breaking, p=1 means that will be
+ *   breaking.
+ *   This parameter is used when there is a single value for the whole road. 
+ * 
+ * * attackProbabilityRandomBreakMultiple
+ *   This saves the value of a radio button that indicates if the simulation
+ *   uses uniform value or multiple values. I am saving just multiple values
+ *   since unifor is the opposite. 
+ * 
+ * * attackProbablityRandomBreakArray
+ *   This is an array of values or probability of breaking, also known as p.
+ *   p=0 means there are no probability of breaking, p=1 means that will be
+ *   breaking.
+ *   This parameter is used when there are different p for each cell on the 
+ *   road.
+ * 
+ * 
+ * 
+ * * For each dentisy at control and Attack:
+ *
+ * 
  * 
  * * Frames
  *   This is a map containing all road simulations.
@@ -151,25 +244,33 @@
 
  */
 
+
+
 class WorkbenchDataBank {
 
 
 
     /**
-     * 
      * @param {int} numberOfCells 
-     * @param {int} density 
-     * @param {float} performanceLowLimit 
-     * @param {float} performanceHighLimit 
-     * @param {Map} frames 
-     * @param {int} totalMovablesCrossedFinishLine 
-     * @param {float} totalMovablesCrossedFinishLinePerFrame
-     * @param {int} numberOfMovables 
      * @param {int} numberOfFrames
-     * @param {float} averageSpeed 
-     * @param {integer} initialFramesToDiscard 
-     * @param {float} totalResilienceMax 
-     * @param {float} totalResilienceMin
+     * @param {int} initialFramesToDiscard 
+     * @param {int} densityInit
+     * @param {int} densityEnd
+     * @param {int} densitySteps
+     * @param {int} plotMaximumYValue
+     * @param {int} plotMinimYValue
+     * @param {float} movablePerformanceHighLimit 
+     * @param {float} movablePerformanceLowLimit
+     * @param {int} controlNumberOfSimulations
+     * @param {int} controlNumberOfHackedMovables
+     * @param {float} controlProbabilityRandomBreak
+     * @param {boolean} controlProbabilityRandomBreakMultiple
+     * @param {array} controlProbabilityRandomBreakArray
+     * @param {int} attackNumberOfSimulations
+     * @param {int} attackNumberOfHackedMovables
+     * @param {float} attackProbabilityRandomBreak
+     * @param {boolean} attackProbabilityRandomBreakMultiple
+     * @param {array} attackProbabilityRandomBreakArray
      */
     constructor(numberOfCells,
         numberOfFrames,
@@ -183,11 +284,16 @@ class WorkbenchDataBank {
         movablePerformanceHighLimit,
         movablePerformanceLowLimit,
         controlNumberOfSimulations,
-        controlProbabilityRandomBreak,
         controlNumberOfHackedMovables,
+        controlProbabilityRandomBreak,
+        controlProbabilityRandomBreakMultiple,
+        controlProbabilityRandomBreakArray,
         attackNumberOfSimulations,
+        attackNumberOfHackedMovables,
         attackProbabilityRandomBreak,
-        attackNumberOfHackedMovables
+        attackProbabilityRandomBreakMultiple,
+        attackProbabilityRandomBreakArray,
+        
     ) {
 
 
@@ -227,8 +333,10 @@ class WorkbenchDataBank {
             //Structure to save control parameters
             this.control = {};
             this.control.numberOfSimulations = controlNumberOfSimulations;
-            this.control.probabilityRandomBreak = controlProbabilityRandomBreak;
             this.control.numberOfHackedMovables = controlNumberOfHackedMovables;
+            this.control.probabilityRandomBreak = controlProbabilityRandomBreak;
+            this.control.probabilityRandomBreakMultiple = controlProbabilityRandomBreakMultiple;
+            this.control.probabilityRandomBreakArray = controlProbabilityRandomBreakArray;
 
             //Simulations
             this.control.simulations;
@@ -239,8 +347,10 @@ class WorkbenchDataBank {
             //Structure to save attack parameters
             this.attack = {};
             this.attack.numberOfSimulations = attackNumberOfSimulations;
-            this.attack.probabilityRandomBreak = attackProbabilityRandomBreak;
             this.attack.numberOfHackedMovables = attackNumberOfHackedMovables;
+            this.attack.probabilityRandomBreak = attackProbabilityRandomBreak;
+            this.attack.probabilityRandomBreakMultiple = attackProbabilityRandomBreakMultiple;
+            this.attack.probabilityRandomBreakArray = attackProbabilityRandomBreakArray;
 
             //Simulations
             this.attack.simulations;

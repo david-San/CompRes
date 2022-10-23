@@ -67,7 +67,8 @@ and open the template in the editor.
             <select id="samples_dropdown">
                 <option value="None" selected="selected">Samples...</option>
             </select>
-        <input id="datasetsButton" type="button" value="Datasets" onclick="workbench.downloadDatasets();return false;" />
+            <input id="datasetsButton" type="button" value="Datasets"
+                onclick="workbench.downloadDatasets();return false;" />
         </div>
 
 
@@ -123,28 +124,75 @@ and open the template in the editor.
         </div>
 
 
+        <!-- Control simulations-->
         <div id="panelWorkbenchInputRight">
-            <h2> Normal simulations</h2>
+            <h2> Control simulations</h2>
 
             <span class="label">Number of Simulations <br> [Recommended 100]</span> <input class="input" type="text"
                 id="controlNumberOfSimulations"><br><br>
-            <span class="label">Probability Random Break <br> [Recommended 0.1]</span> <input class="input" type="text"
-                id="controlProbabilityRandomBreak"><br><br>
             <span class="label">Hacked Movables <br> [Recommended 0]</span> <input class="input" class="input"
                 type="text" id="controlMovablesHacked"><br><br>
+
+
+
+
+
+            <!-- Probability Random Break Section-->
+            <span class="label">Probability Random Break <br> [Recommended 0.1+]</span>
+
+            <input class="inputRadio" type="radio" id="controlProbabilityRandomBreakUniform"
+                name="proabilityUnderNormal" checked>
+            <label class="labelRadio" for="controlProbabilityRandomBreakUniform">Uniform</label>
+            <input class="input" type="text" id="controlProbabilityRandomBreak"><br>
+
+            <span class="label"></span>
+            <input class="inputRadio" type="radio" id="controlProbabilityRandomBreakMultiple" name="proabilityUnderNormal">
+            <label class="labelRadio" for="controlProbabilityMultiple">Multiple</label><br>
+
+            <!-- Scrollable multiple probability random Break-->
+            <div class="scroll" id="controlProbabilityMultipleValue">
+            </div>
         </div>
 
 
+
+
+
+
+
+        <!-- Under-Attack simulations-->
         <div id="panelWorkbenchInputRight">
             <h2> Under-Attack simulations</h2>
             <span class="label">Number of Simulations <br> [Recommended 1]</span> <input class="input" type="text"
                 id="attackNumberOfSimulations"><br><br>
-            <span class="label">Probability Random Break <br> [Recommended 0.1+]</span> <input class="input" type="text"
-                id="attackProbabilityRandomBreak"><br><br>
             <span class="label">Hacked Movables <br> [Recommended 1+]</span> <input class="input" type="text"
                 id="attackMovablesHacked"><br><br>
+
+
+
+
+
+            <!-- Probability Random Break Section-->
+            <span class="label">Probability Random Break <br> [Recommended 0.1+]</span>
+
+            <input class="inputRadio" type="radio" id="attackProbabilityRandomBreakUniform" name="proabilityUnderAttack"
+                checked>
+            <label class="labelRadio" for="attackProbabilityRandomBreakUniform">Uniform</label>
+            <input class="input" type="text" id="attackProbabilityRandomBreak"><br>
+
+            <span class="label"></span>
+            <input class="inputRadio" type="radio" id="attackProbabilityRandomBreakMultiple" name="proabilityUnderAttack">
+            <label class="labelRadio" for="attackProbabilityMultiple">Multiple</label><br>
+
+            <!-- Scrollable multiple probability random Break-->
+            <div class="scroll" id="attackProbabilityMultipleValue">
+            </div>
+
+
+
+
+
         </div>
-        <!-- </form> -->
     </div>
 
 
@@ -191,6 +239,8 @@ and open the template in the editor.
 
     <script type="text/javascript" src="../classes/WorkbenchDataBank.js"></script>
     <script type="text/javascript" src="../classes/Workbench.js"></script>
+
+    <script type="text/javascript" src="../scripts/workbench.js"></script>
 
 </body>
 
