@@ -170,6 +170,13 @@ class Simulator {
         this._arrayOfMovables = new Array();
 
 
+        //Creates a sensor that will be shared by all stakeholders
+        let mySensor = new Sensor(
+            numberOfCells,
+            this.probabilityRandomBreak,
+            this.probabilityRandomBreakMultiple,
+            this.probabilityRandomBreakArray);
+
 
         if (numberOfmovables < numberOfCells) {
 
@@ -180,7 +187,7 @@ class Simulator {
                 if (road[randomPosition] === undefined) {
 
                     let myStakeholder = new Stakeholder(
-                        this.velocityMax);
+                        this.velocityMax, mySensor);
 
                     let myMovable = new Movable(id, randomPosition, myStakeholder, kind);
 
@@ -219,7 +226,7 @@ class Simulator {
 
         while ((numberOfMovablesToHack > hackedMovables) && (numberOfMovables > hackedMovables)) {
 
-        // while ((numberOfMovablesToHack > 0) && (numberOfMovables >= numberOfMovablesToHack)) {
+            // while ((numberOfMovablesToHack > 0) && (numberOfMovables >= numberOfMovablesToHack)) {
 
             randomPosition = Math.floor((Math.random() * numberOfMovables));
 
@@ -323,16 +330,8 @@ class Simulator {
                 let nextMovableDistance = this.findDistanceToNextMovable(i);
 
                 let myMovable = cells[i];
-                
-                //Take default probability of random break
-                let myProbabilityRandomBreak = this.probabilityRandomBreak;
 
-                //If multiple random break, then override valur
-                if (this.probabilityRandomBreakMultiple === true) {
-                    myProbabilityRandomBreak = this.probabilityRandomBreakArray[i];
-                }
-                
-                myMovable.stakeholderDecide(nextMovableDistance, myProbabilityRandomBreak);
+                myMovable.stakeholderDecide(nextMovableDistance, i);
 
                 let myMovablePosition = myMovable.x;
 
@@ -459,15 +458,7 @@ class Simulator {
                 }
             }
 
-
-
-
-
             let averageSpeed = totalSpeedOfAllMovables / totalNumberOfMovables;
-
-
-
-
 
             totalAverageSpeed = totalAverageSpeed + averageSpeed;
             totalMaxExpected = totalMaxExpected + speedHighLimit;

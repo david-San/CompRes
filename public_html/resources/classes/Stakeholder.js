@@ -59,7 +59,7 @@ class Stakeholder {
      * Rules are taken fron the NaSch simulator
      * 
      */
-    constructor(velocityMax) {
+    constructor(velocityMax, sensor) {
 
 
 
@@ -72,6 +72,7 @@ class Stakeholder {
         //Private by convention, not really private by Javascript
         // this._probability = probability;
         this._velocityMax = velocityMax;
+        this._sensor = sensor;
 
 
 
@@ -170,7 +171,9 @@ class Stakeholder {
      *  Taken from:
      * https://stackoverflow.com/questions/8877249/generate-random-integers-with-probabilities
      */
-    randomise(probabilityRandomBreak) {
+    randomise(currentCell) {
+
+        let probabilityRandomBreak = this._sensor.getNextReading(currentCell, this.velocity);
 
         //According to Poore [poore2006emergent]
         if (this.velocity > 0 && (Math.random() < probabilityRandomBreak)) {
@@ -197,14 +200,14 @@ class Stakeholder {
      * @returns this.x new poisition
      */
 
-    decide(nextVehicleDistance, velocity, probabilityRandomBreak) {
+    decide(nextVehicleDistance, velocity, currentCell) {
 
 
         this.velocity = velocity;
 
         this.accelerate(nextVehicleDistance);
         this.decelerate(nextVehicleDistance);
-        this.randomise(probabilityRandomBreak);
+        this.randomise(currentCell);
 
         const answer = {
             "velocity": this.velocity
