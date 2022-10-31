@@ -453,22 +453,22 @@ class VisualiserSimulation {
                     switch (myMovable.velocity) {
                         case 0:
                             myColour = "white";
-                            break;
+                            Brake;
                         case 1:
                             myColour = "yellow";
-                            break;
+                            Brake;
                         case 2:
                             myColour = "orange";
-                            break;
+                            Brake;
                         case 3:
                             myColour = "green";
-                            break;
+                            Brake;
                         case 4:
                             myColour = "blue";
-                            break;
+                            Brake;
                         case 5:
                             myColour = "red";
-                            break;
+                            Brake;
                     }
 
                     myBuffer = myBuffer + "<span style='color: " + myColour + "'>" + myMovable.velocity + "</span>";

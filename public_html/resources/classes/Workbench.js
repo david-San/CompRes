@@ -213,12 +213,12 @@ class Workbench {
                 document.getElementById("movablePerformanceLowLimit").value = parameters.movablePerformanceLowLimit;
 
                 //Control
-                document.getElementById("controlProbabilityRandomBreak").value = parameters.controlProbabilityRandomBreak;
+                document.getElementById("controlProbabilityRandomBrake").value = parameters.controlProbabilityRandomBrake;
                 document.getElementById("controlNumberOfSimulations").value = parameters.controlNumberOfSimulations;
                 document.getElementById("controlMovablesHacked").value = parameters.controlMovablesHacked;
 
                 //Attack
-                document.getElementById("attackProbabilityRandomBreak").value = parameters.attackProbabilityRandomBreak;
+                document.getElementById("attackProbabilityRandomBrake").value = parameters.attackProbabilityRandomBrake;
                 document.getElementById("attackNumberOfSimulations").value = parameters.attackNumberOfSimulations;
                 document.getElementById("attackMovablesHacked").value = parameters.attackMovablesHacked;
 
@@ -249,11 +249,11 @@ class Workbench {
                 "movablePerformanceLowLimit": 0.5,
 
                 "controlNumberOfSimulations": 10,
-                "controlProbabilityRandomBreak": 0.1,
+                "controlProbabilityRandomBrake": 0.1,
                 "controlMovablesHacked": 0,
 
                 "attackNumberOfSimulations": 10,
-                "attackProbabilityRandomBreak": 0.1,
+                "attackProbabilityRandomBrake": 0.1,
                 "attackMovablesHacked": 1
             }
 
@@ -275,11 +275,11 @@ class Workbench {
                 "movablePerformanceLowLimit": 0.5,
 
                 "controlNumberOfSimulations": 100,
-                "controlProbabilityRandomBreak": 0.1,
+                "controlProbabilityRandomBrake": 0.1,
                 "controlMovablesHacked": 0,
 
                 "attackNumberOfSimulations": 100,
-                "attackProbabilityRandomBreak": 0.5,
+                "attackProbabilityRandomBrake": 0.5,
                 "attackMovablesHacked": 0
             }
 
@@ -301,11 +301,11 @@ class Workbench {
                 "movablePerformanceLowLimit": 0.1,
 
                 "controlNumberOfSimulations": 100,
-                "controlProbabilityRandomBreak": 0.1,
+                "controlProbabilityRandomBrake": 0.1,
                 "controlMovablesHacked": 0,
 
                 "attackNumberOfSimulations": 100,
-                "attackProbabilityRandomBreak": 0.1,
+                "attackProbabilityRandomBrake": 0.1,
                 "attackMovablesHacked": 1
             }
 
@@ -516,9 +516,9 @@ class Workbench {
         const controlNumberOfSimulations = parseFloat(document.getElementById("controlNumberOfSimulations").value);
         const controlNumberOfHackedMovables = parseFloat(document.getElementById("controlMovablesHacked").value);
 
-        const controlProbabilityRanDomBreakUniform = document.getElementById("controlProbabilityRandomBreakUniform").checked;
-        const controlProbabilityRanDomBreakMultiple = document.getElementById("controlProbabilityRandomBreakMultiple").checked;
-        const controlProbabilityRandomBreak = parseFloat(document.getElementById("controlProbabilityRandomBreak").value);
+        const controlProbabilityRanDomBrakeUniform = document.getElementById("controlProbabilityRandomBrakeUniform").checked;
+        const controlProbabilityRanDomBrakeMultiple = document.getElementById("controlProbabilityRandomBrakeMultiple").checked;
+        const controlProbabilityRandomBrake = parseFloat(document.getElementById("controlProbabilityRandomBrake").value);
 
 
         //Attack simulations only
@@ -526,32 +526,32 @@ class Workbench {
         const attackNumberOfHackedMovables = parseFloat(document.getElementById("attackMovablesHacked").value);
 
 
-        const attackProbabilityRandomBreakUniform = document.getElementById("attackProbabilityRandomBreakUniform").checked;
-        const attackProbabilityRandomBreakMultiple = document.getElementById("attackProbabilityRandomBreakMultiple").checked;
-        const attackProbabilityRandomBreak = parseFloat(document.getElementById("attackProbabilityRandomBreak").value);
+        const attackProbabilityRandomBrakeUniform = document.getElementById("attackProbabilityRandomBrakeUniform").checked;
+        const attackProbabilityRandomBrakeMultiple = document.getElementById("attackProbabilityRandomBrakeMultiple").checked;
+        const attackProbabilityRandomBrake = parseFloat(document.getElementById("attackProbabilityRandomBrake").value);
 
 
 
-        const controlProbabilityRandomBreakArray = [];
-        const attackProbabilityRandomBreakArray = [];
+        const controlProbabilityRandomBrakeArray = [];
+        const attackProbabilityRandomBrakeArray = [];
 
-        //Read Control Multiple probability Random Break
-        if (controlProbabilityRanDomBreakMultiple === true) {
+        //Read Control Multiple probability Random Brake
+        if (controlProbabilityRanDomBrakeMultiple === true) {
 
             for (let i = 0; i < numberOfCells; i++) {
                 let myInputValue = parseFloat(document.getElementById("controlProbabilityCell" + i).value);
-                controlProbabilityRandomBreakArray.push(myInputValue);
+                controlProbabilityRandomBrakeArray.push(myInputValue);
             }
         }
 
 
 
-        //Read Attack Multiple probability Random Break
-        if (attackProbabilityRandomBreakMultiple === true) {
+        //Read Attack Multiple probability Random Brake
+        if (attackProbabilityRandomBrakeMultiple === true) {
 
             for (let i = 0; i < numberOfCells; i++) {
                 let myInputValue = parseFloat(document.getElementById("attackProbabilityCell" + i).value);
-                attackProbabilityRandomBreakArray.push(myInputValue);
+                attackProbabilityRandomBrakeArray.push(myInputValue);
             }
         }
 
@@ -574,14 +574,14 @@ class Workbench {
             movablePerformanceLowLimit,
             controlNumberOfSimulations,
             controlNumberOfHackedMovables,
-            controlProbabilityRandomBreak,
-            controlProbabilityRanDomBreakMultiple,
-            controlProbabilityRandomBreakArray,
+            controlProbabilityRandomBrake,
+            controlProbabilityRanDomBrakeMultiple,
+            controlProbabilityRandomBrakeArray,
             attackNumberOfSimulations,
             attackNumberOfHackedMovables,
-            attackProbabilityRandomBreak,
-            attackProbabilityRandomBreakMultiple,
-            attackProbabilityRandomBreakArray);
+            attackProbabilityRandomBrake,
+            attackProbabilityRandomBrakeMultiple,
+            attackProbabilityRandomBrakeArray);
     }
 
 
@@ -619,23 +619,23 @@ class Workbench {
         //Control simulations only
         document.getElementById("controlNumberOfSimulations").value = this.workbenchDataBank.control.numberOfSimulations;
         document.getElementById("controlMovablesHacked").value = this.workbenchDataBank.control.numberOfHackedMovables;
-        document.getElementById("controlProbabilityRandomBreak").value = this.workbenchDataBank.control.probabilityRandomBreak;
-        document.getElementById("controlProbabilityRandomBreakMultiple").checked = this.workbenchDataBank.control.probabilityRandomBreakMultiple;
+        document.getElementById("controlProbabilityRandomBrake").value = this.workbenchDataBank.control.probabilityRandomBrake;
+        document.getElementById("controlProbabilityRandomBrakeMultiple").checked = this.workbenchDataBank.control.probabilityRandomBrakeMultiple;
 
-        //Writing multiple probability random break control fields
-        if (this.workbenchDataBank.control.probabilityRandomBreakMultiple === true) {
+        //Writing multiple probability random Brake control fields
+        if (this.workbenchDataBank.control.probabilityRandomBrakeMultiple === true) {
             const container = document.getElementById("controlProbabilityMultipleValue");
             const numberOfCells = this.workbenchDataBank.common.numberOfCells;
-            const uniformValue = this.workbenchDataBank.control.probabilityRandomBreak;
+            const uniformValue = this.workbenchDataBank.control.probabilityRandomBrake;
             const fieldNamePrefix = "controlProbabilityCell"
-            const probabilityRandomBreakArray = this.workbenchDataBank.control.probabilityRandomBreakArray;
+            const probabilityRandomBrakeArray = this.workbenchDataBank.control.probabilityRandomBrakeArray;
 
-            this.createMultipleProbabilityRandomBreakInputFields(
+            this.createMultipleProbabilityRandomBrakeInputFields(
                 container,
                 numberOfCells,
                 uniformValue,
                 fieldNamePrefix,
-                probabilityRandomBreakArray);
+                probabilityRandomBrakeArray);
         }
 
 
@@ -645,24 +645,24 @@ class Workbench {
         //Attack simulations only
         document.getElementById("attackNumberOfSimulations").value = this.workbenchDataBank.attack.numberOfSimulations;
         document.getElementById("attackMovablesHacked").value = this.workbenchDataBank.attack.numberOfHackedMovables;
-        document.getElementById("attackProbabilityRandomBreak").value = this.workbenchDataBank.attack.probabilityRandomBreak;
+        document.getElementById("attackProbabilityRandomBrake").value = this.workbenchDataBank.attack.probabilityRandomBrake;
 
-        document.getElementById("attackProbabilityRandomBreakMultiple").checked = this.workbenchDataBank.attack.probabilityRandomBreakMultiple;
+        document.getElementById("attackProbabilityRandomBrakeMultiple").checked = this.workbenchDataBank.attack.probabilityRandomBrakeMultiple;
 
-        //Writing multiple probability random break attack fields
-        if (this.workbenchDataBank.attack.probabilityRandomBreakMultiple === true) {
+        //Writing multiple probability random Brake attack fields
+        if (this.workbenchDataBank.attack.probabilityRandomBrakeMultiple === true) {
             const container = document.getElementById("attackProbabilityMultipleValue");
             const numberOfCells = this.workbenchDataBank.common.numberOfCells;
-            const uniformValue = this.workbenchDataBank.attack.probabilityRandomBreak;
+            const uniformValue = this.workbenchDataBank.attack.probabilityRandomBrake;
             const fieldNamePrefix = "attackProbabilityCell";
-            const probabilityRandomBreakArray = this.workbenchDataBank.attack.probabilityRandomBreakArray;
+            const probabilityRandomBrakeArray = this.workbenchDataBank.attack.probabilityRandomBrakeArray;
 
-            this.createMultipleProbabilityRandomBreakInputFields(
+            this.createMultipleProbabilityRandomBrakeInputFields(
                 container,
                 numberOfCells,
                 uniformValue,
                 fieldNamePrefix,
-                probabilityRandomBreakArray);
+                probabilityRandomBrakeArray);
         }
 
 
@@ -699,16 +699,16 @@ class Workbench {
         //Control
         const controlNumberOfSimulations = this.workbenchDataBank.control.numberOfSimulations;
         const controlNumberOfHackedMovables = this.workbenchDataBank.control.numberOfHackedMovables;
-        const controlProbabilityRandomBreak = this.workbenchDataBank.control.probabilityRandomBreak;
-        const controlProbabilityRandomBreakMultiple = this.workbenchDataBank.control.probabilityRandomBreakMultiple;
-        const controlProbabilityRandomBreakArray = this.workbenchDataBank.control.probabilityRandomBreakArray;
+        const controlProbabilityRandomBrake = this.workbenchDataBank.control.probabilityRandomBrake;
+        const controlProbabilityRandomBrakeMultiple = this.workbenchDataBank.control.probabilityRandomBrakeMultiple;
+        const controlProbabilityRandomBrakeArray = this.workbenchDataBank.control.probabilityRandomBrakeArray;
 
         //Attack
         const attackNumberOfSimulations = this.workbenchDataBank.attack.numberOfSimulations;
         const attackNumberOfHackedMovables = this.workbenchDataBank.attack.numberOfHackedMovables;
-        const attackProbabilityRandomBreak = this.workbenchDataBank.attack.probabilityRandomBreak;
-        const attackProbabilityRandomBreakMultiple = this.workbenchDataBank.attack.probabilityRandomBreakMultiple;
-        const attackProbabilityRandomBreakArray = this.workbenchDataBank.attack.probabilityRandomBreakArray;
+        const attackProbabilityRandomBrake = this.workbenchDataBank.attack.probabilityRandomBrake;
+        const attackProbabilityRandomBrakeMultiple = this.workbenchDataBank.attack.probabilityRandomBrakeMultiple;
+        const attackProbabilityRandomBrakeArray = this.workbenchDataBank.attack.probabilityRandomBrakeArray;
 
 
 
@@ -725,9 +725,9 @@ class Workbench {
 
             controlNumberOfSimulations,
             controlNumberOfHackedMovables,
-            controlProbabilityRandomBreak,
-            controlProbabilityRandomBreakMultiple,
-            controlProbabilityRandomBreakArray
+            controlProbabilityRandomBrake,
+            controlProbabilityRandomBrakeMultiple,
+            controlProbabilityRandomBrakeArray
         )
 
         const myAttackSimulation = this.createSimulation(
@@ -743,9 +743,9 @@ class Workbench {
 
             attackNumberOfSimulations,
             attackNumberOfHackedMovables,
-            attackProbabilityRandomBreak,
-            attackProbabilityRandomBreakMultiple,
-            attackProbabilityRandomBreakArray
+            attackProbabilityRandomBrake,
+            attackProbabilityRandomBrakeMultiple,
+            attackProbabilityRandomBrakeArray
         )
 
 
@@ -779,9 +779,9 @@ class Workbench {
 
         numberOfSimulations,
         numberOfHackedMovables,
-        probabilityRandomBreak,
-        probabilityRandomBreakMultiple,
-        probabilityRandomBreakArray) {
+        probabilityRandomBrake,
+        probabilityRandomBrakeMultiple,
+        probabilityRandomBrakeArray) {
 
 
         //New simlations map to store all runnings
@@ -822,9 +822,9 @@ class Workbench {
                     initialFramesToDiscard,
                     performanceLowLimit,
                     performanceHighLimit,
-                    probabilityRandomBreak,
-                    probabilityRandomBreakMultiple,
-                    probabilityRandomBreakArray,
+                    probabilityRandomBrake,
+                    probabilityRandomBrakeMultiple,
+                    probabilityRandomBrakeArray,
                     movableMaxSpeed,
                     numberOfHackedMovables
                 );
@@ -1210,7 +1210,7 @@ class Workbench {
          * 
          * @param {DOM} container 
          */
-    createMultipleProbabilityRandomBreakInputFields(container, numberOfCells, uniformValue, fieldNamePrefix, probabilityRandomBreakArray) {
+    createMultipleProbabilityRandomBrakeInputFields(container, numberOfCells, uniformValue, fieldNamePrefix, probabilityRandomBrakeArray) {
 
         //Removing previous input elments
         container.innerHTML = '';
@@ -1228,8 +1228,8 @@ class Workbench {
 
             //Prefilling the input field
 
-            if (typeof probabilityRandomBreakArray !== 'undefined') {
-                myInputField.value = probabilityRandomBreakArray[i];
+            if (typeof probabilityRandomBrakeArray !== 'undefined') {
+                myInputField.value = probabilityRandomBrakeArray[i];
             } else {
                 myInputField.value = uniformValue;
             }

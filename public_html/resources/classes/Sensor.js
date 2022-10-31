@@ -31,19 +31,19 @@
 
 /**
  * This is a sensor. 
- * Sensor senses the probability of breaking on a road.
+ * Sensor senses the probability of Brakeing on a road.
  * Each stakeholder has access to a sensor.
  * I have one sensor for all movables to save memory.
  * A sensor receives as parameter the cell in which the movable is
  * and the cell to which the movable wants to move.
  * The sensor checks all the positions from the current cell until
- * the destination cell and returns the highest breaking probability.
+ * the destination cell and returns the highest Brakeing probability.
  * 
  * This tries to mimic real life behaviour.
  * The stakeholder will try to accelerate and move the vehicle as 
  * fast as possible. The fastest scenario will be 5 cells.
  * If there is a poddle of water on the cell 5, the stakeholder
- * will need to break according to the amount of water that he finds.
+ * will need to Brake according to the amount of water that he finds.
  * This will recalculate the position he has.
  * 
  * The main issue happens if there are two poddles on the road.
@@ -89,15 +89,15 @@ class Sensor {
      * It saves in x the specified initial position
      * 
      * @param {int} numberOfCells 
-     * @param {float} probabilityRandomBreak 
-     * @param {float} probabilityRandomBreakMultiple 
-     * @param {array} probabilityRandomBreakArray 
+     * @param {float} probabilityRandomBrake 
+     * @param {float} probabilityRandomBrakeMultiple 
+     * @param {array} probabilityRandomBrakeArray 
      */
     constructor(
         numberOfCells,
-        probabilityRandomBreak,
-        probabilityRandomBreakMultiple,
-        probabilityRandomBreakArray) {
+        probabilityRandomBrake,
+        probabilityRandomBrakeMultiple,
+        probabilityRandomBrakeArray) {
 
 
 
@@ -106,9 +106,9 @@ class Sensor {
         // ========================================================================== //
         // Privileged attributes
         this.numberOfCells = numberOfCells;
-        this.probabilityRandomBreak = probabilityRandomBreak;
-        this.probabilityRandomBreakMultiple = probabilityRandomBreakMultiple;
-        this.probabilityRandomBreakArray = probabilityRandomBreakArray;
+        this.probabilityRandomBrake = probabilityRandomBrake;
+        this.probabilityRandomBrakeMultiple = probabilityRandomBrakeMultiple;
+        this.probabilityRandomBrakeArray = probabilityRandomBrakeArray;
 
 
 
@@ -157,16 +157,16 @@ class Sensor {
      */
     getNextReading(currentCell, velocity) {
 
-        let currentSensorReading = this.probabilityRandomBreak;
-        let probabilityRandomBreakMultiple = this.probabilityRandomBreakMultiple;
+        let currentSensorReading = this.probabilityRandomBrake;
+        let probabilityRandomBrakeMultiple = this.probabilityRandomBrakeMultiple;
 
-        if (probabilityRandomBreakMultiple === true) {
-            //Multiple probabilities of random break
+        if (probabilityRandomBrakeMultiple === true) {
+            //Multiple probabilities of random Brake
     
             const destinationCell = currentCell + velocity;
             const cells = this.numberOfCells;
 
-            currentSensorReading = this.probabilityRandomBreakArray[currentCell];
+            currentSensorReading = this.probabilityRandomBrakeArray[currentCell];
 
             // let i = currentCell;
 
@@ -178,7 +178,7 @@ class Sensor {
                 //inside the array                    
                 let readingCell = i % cells;
 
-                let mySensorReading = this.probabilityRandomBreakArray[readingCell];
+                let mySensorReading = this.probabilityRandomBrakeArray[readingCell];
 
                 if (mySensorReading > currentSensorReading) {
                     currentSensorReading = mySensorReading;

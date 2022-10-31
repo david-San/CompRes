@@ -52,9 +52,9 @@ class Simulator {
      * @param {int} initialFramesToDiscard
      * @param {float} performanceLowLimit
      * @param {float} performanceHighLimit
-     * @param {float} probabilityRandomBreak
-     * @param {boolean} probabilityRandomBreakMultiple
-     * @param {array} probabilityRandomBreakArray
+     * @param {float} probabilityRandomBrake
+     * @param {boolean} probabilityRandomBrakeMultiple
+     * @param {array} probabilityRandomBrakeArray
      * @param {int} velocityMax
      * @param {int} movablesHacked
      */
@@ -64,9 +64,9 @@ class Simulator {
         initialFramesToDiscard,
         performanceLowLimit,
         performanceHighLimit,
-        probabilityRandomBreak,
-        probabilityRandomBreakMultiple,
-        probabilityRandomBreakArray,
+        probabilityRandomBrake,
+        probabilityRandomBrakeMultiple,
+        probabilityRandomBrakeArray,
         velocityMax,
         movablesHacked) {
 
@@ -81,9 +81,9 @@ class Simulator {
         this.initialFramesToDiscard = initialFramesToDiscard;
         this.speedLowLimit = performanceLowLimit;
         this.speedHighLimit = performanceHighLimit;
-        this.probabilityRandomBreak = probabilityRandomBreak;
-        this.probabilityRandomBreakMultiple = probabilityRandomBreakMultiple;
-        this.probabilityRandomBreakArray = probabilityRandomBreakArray;
+        this.probabilityRandomBrake = probabilityRandomBrake;
+        this.probabilityRandomBrakeMultiple = probabilityRandomBrakeMultiple;
+        this.probabilityRandomBrakeArray = probabilityRandomBrakeArray;
         this.velocityMax = velocityMax;
         this.movablesHacked = movablesHacked;
 
@@ -173,9 +173,9 @@ class Simulator {
         //Creates a sensor that will be shared by all stakeholders
         let mySensor = new Sensor(
             numberOfCells,
-            this.probabilityRandomBreak,
-            this.probabilityRandomBreakMultiple,
-            this.probabilityRandomBreakArray);
+            this.probabilityRandomBrake,
+            this.probabilityRandomBrakeMultiple,
+            this.probabilityRandomBrakeArray);
 
 
         if (numberOfmovables < numberOfCells) {
@@ -236,7 +236,7 @@ class Simulator {
 
                 if (myMovable.kind === "clear") {
 
-                    let myHackedStakeholder = new StakeholderHack1(this.probabilityRandomBreak, this.velocityMax);
+                    let myHackedStakeholder = new StakeholderHack1(this.probabilityRandomBrake, this.velocityMax);
 
                     myMovable.setStakeholder(myHackedStakeholder);
                     myMovable.setKind("hacked");

@@ -173,10 +173,10 @@ class Stakeholder {
      */
     randomise(currentCell) {
 
-        let probabilityRandomBreak = this._sensor.getNextReading(currentCell, this.velocity);
+        let probabilityRandomBrake = this._sensor.getNextReading(currentCell, this.velocity);
 
         //According to Poore [poore2006emergent]
-        if (this.velocity > 0 && (Math.random() < probabilityRandomBreak)) {
+        if (this.velocity > 0 && (Math.random() < probabilityRandomBrake)) {
             this.velocity = Math.max(this.velocity - 1, 0);
         }
 

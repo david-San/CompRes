@@ -49,12 +49,12 @@
  *       |------Movable Performance Low Limit 
  *       |------controlNumberOfSimulations
  *       |------controlNumberOfHackedMovables
- *       |------controlProbabilityRandomBreak
- *       |------controlArrayProbabilityRandomBreak
+ *       |------controlProbabilityRandomBrake
+ *       |------controlArrayProbabilityRandomBrake
  *       |------attackNumberOfSimulations
  *       |------attackNumberOfHackedMovables
- *       |------attackProbabilityRandomBreak
- *       |------attackArrayProbabilityRandomBreak
+ *       |------attackProbabilityRandomBrake
+ *       |------attackArrayProbabilityRandomBrake
  * 
  * 
  *   |---Control
@@ -156,21 +156,21 @@
  *   This parameter tells how many vehicles are  having problems in decision
  *   making.
  * 
- * * controlProbablityRandomBreak
- *   This value models the probability of breaking, also known as p.
- *   p=0 means there are no probability of breaking, p=1 means that will be
- *   breaking.
+ * * controlProbablityRandomBrake
+ *   This value models the probability of Brakeing, also known as p.
+ *   p=0 means there are no probability of Brakeing, p=1 means that will be
+ *   Brakeing.
  *   This parameter is used when there is a single value for the whole road. 
  * 
- *  * controlProbabilityRandomBreakMultiple
+ *  * controlProbabilityRandomBrakeMultiple
  *   This saves the value of a radio button that indicates if the simulation
  *   uses uniform value or multiple values. I am saving just multiple values
  *   since unifor is the opposite. 
  * 
- * * controlProbablityRandomBreakArray
- *   This is an array of values or probability of breaking, also known as p.
- *   p=0 means there are no probability of breaking, p=1 means that will be
- *   breaking.
+ * * controlProbablityRandomBrakeArray
+ *   This is an array of values or probability of Brakeing, also known as p.
+ *   p=0 means there are no probability of Brakeing, p=1 means that will be
+ *   Brakeing.
  *   This parameter is used when there are different p for each cell on the 
  *   road.
  * 
@@ -182,21 +182,21 @@
  *   This parameter tells how many vehicles are  having problems in decision
  *   making.
  * 
- * * attackProbablityRandomBreak
- *   This value models the probability of breaking, also known as p.
- *   p=0 means there are no probability of breaking, p=1 means that will be
- *   breaking.
+ * * attackProbablityRandomBrake
+ *   This value models the probability of Brakeing, also known as p.
+ *   p=0 means there are no probability of Brakeing, p=1 means that will be
+ *   Brakeing.
  *   This parameter is used when there is a single value for the whole road. 
  * 
- * * attackProbabilityRandomBreakMultiple
+ * * attackProbabilityRandomBrakeMultiple
  *   This saves the value of a radio button that indicates if the simulation
  *   uses uniform value or multiple values. I am saving just multiple values
  *   since unifor is the opposite. 
  * 
- * * attackProbablityRandomBreakArray
- *   This is an array of values or probability of breaking, also known as p.
- *   p=0 means there are no probability of breaking, p=1 means that will be
- *   breaking.
+ * * attackProbablityRandomBrakeArray
+ *   This is an array of values or probability of Brakeing, also known as p.
+ *   p=0 means there are no probability of Brakeing, p=1 means that will be
+ *   Brakeing.
  *   This parameter is used when there are different p for each cell on the 
  *   road.
  * 
@@ -263,14 +263,14 @@ class WorkbenchDataBank {
      * @param {float} movablePerformanceLowLimit
      * @param {int} controlNumberOfSimulations
      * @param {int} controlNumberOfHackedMovables
-     * @param {float} controlProbabilityRandomBreak
-     * @param {boolean} controlProbabilityRandomBreakMultiple
-     * @param {array} controlProbabilityRandomBreakArray
+     * @param {float} controlProbabilityRandomBrake
+     * @param {boolean} controlProbabilityRandomBrakeMultiple
+     * @param {array} controlProbabilityRandomBrakeArray
      * @param {int} attackNumberOfSimulations
      * @param {int} attackNumberOfHackedMovables
-     * @param {float} attackProbabilityRandomBreak
-     * @param {boolean} attackProbabilityRandomBreakMultiple
-     * @param {array} attackProbabilityRandomBreakArray
+     * @param {float} attackProbabilityRandomBrake
+     * @param {boolean} attackProbabilityRandomBrakeMultiple
+     * @param {array} attackProbabilityRandomBrakeArray
      */
     constructor(numberOfCells,
         numberOfFrames,
@@ -285,14 +285,14 @@ class WorkbenchDataBank {
         movablePerformanceLowLimit,
         controlNumberOfSimulations,
         controlNumberOfHackedMovables,
-        controlProbabilityRandomBreak,
-        controlProbabilityRandomBreakMultiple,
-        controlProbabilityRandomBreakArray,
+        controlProbabilityRandomBrake,
+        controlProbabilityRandomBrakeMultiple,
+        controlProbabilityRandomBrakeArray,
         attackNumberOfSimulations,
         attackNumberOfHackedMovables,
-        attackProbabilityRandomBreak,
-        attackProbabilityRandomBreakMultiple,
-        attackProbabilityRandomBreakArray,
+        attackProbabilityRandomBrake,
+        attackProbabilityRandomBrakeMultiple,
+        attackProbabilityRandomBrakeArray,
         
     ) {
 
@@ -334,9 +334,9 @@ class WorkbenchDataBank {
             this.control = {};
             this.control.numberOfSimulations = controlNumberOfSimulations;
             this.control.numberOfHackedMovables = controlNumberOfHackedMovables;
-            this.control.probabilityRandomBreak = controlProbabilityRandomBreak;
-            this.control.probabilityRandomBreakMultiple = controlProbabilityRandomBreakMultiple;
-            this.control.probabilityRandomBreakArray = controlProbabilityRandomBreakArray;
+            this.control.probabilityRandomBrake = controlProbabilityRandomBrake;
+            this.control.probabilityRandomBrakeMultiple = controlProbabilityRandomBrakeMultiple;
+            this.control.probabilityRandomBrakeArray = controlProbabilityRandomBrakeArray;
 
             //Simulations
             this.control.simulations;
@@ -348,9 +348,9 @@ class WorkbenchDataBank {
             this.attack = {};
             this.attack.numberOfSimulations = attackNumberOfSimulations;
             this.attack.numberOfHackedMovables = attackNumberOfHackedMovables;
-            this.attack.probabilityRandomBreak = attackProbabilityRandomBreak;
-            this.attack.probabilityRandomBreakMultiple = attackProbabilityRandomBreakMultiple;
-            this.attack.probabilityRandomBreakArray = attackProbabilityRandomBreakArray;
+            this.attack.probabilityRandomBrake = attackProbabilityRandomBrake;
+            this.attack.probabilityRandomBrakeMultiple = attackProbabilityRandomBrakeMultiple;
+            this.attack.probabilityRandomBrakeArray = attackProbabilityRandomBrakeArray;
 
             //Simulations
             this.attack.simulations;
