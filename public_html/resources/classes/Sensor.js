@@ -31,13 +31,13 @@
 
 /**
  * This is a sensor. 
- * Sensor senses the probability of Brakeing on a road.
+ * Sensor senses the probability of braking on a road.
  * Each stakeholder has access to a sensor.
  * I have one sensor for all movables to save memory.
  * A sensor receives as parameter the cell in which the movable is
  * and the cell to which the movable wants to move.
  * The sensor checks all the positions from the current cell until
- * the destination cell and returns the highest Brakeing probability.
+ * the destination cell and returns the highest braking probability.
  * 
  * This tries to mimic real life behaviour.
  * The stakeholder will try to accelerate and move the vehicle as 

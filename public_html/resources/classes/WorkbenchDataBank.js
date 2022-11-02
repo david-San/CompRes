@@ -157,9 +157,9 @@
  *   making.
  * 
  * * controlProbablityRandomBrake
- *   This value models the probability of Brakeing, also known as p.
- *   p=0 means there are no probability of Brakeing, p=1 means that will be
- *   Brakeing.
+ *   This value models the probability of braking, also known as p.
+ *   p=0 means there are no probability of braking, p=1 means that will be
+ *   braking.
  *   This parameter is used when there is a single value for the whole road. 
  * 
  *  * controlProbabilityRandomBrakeMultiple
@@ -168,9 +168,9 @@
  *   since unifor is the opposite. 
  * 
  * * controlProbablityRandomBrakeArray
- *   This is an array of values or probability of Brakeing, also known as p.
- *   p=0 means there are no probability of Brakeing, p=1 means that will be
- *   Brakeing.
+ *   This is an array of values or probability of braking, also known as p.
+ *   p=0 means there are no probability of braking, p=1 means that will be
+ *   braking.
  *   This parameter is used when there are different p for each cell on the 
  *   road.
  * 
@@ -183,9 +183,9 @@
  *   making.
  * 
  * * attackProbablityRandomBrake
- *   This value models the probability of Brakeing, also known as p.
- *   p=0 means there are no probability of Brakeing, p=1 means that will be
- *   Brakeing.
+ *   This value models the probability of braking, also known as p.
+ *   p=0 means there are no probability of braking, p=1 means that will be
+ *   braking.
  *   This parameter is used when there is a single value for the whole road. 
  * 
  * * attackProbabilityRandomBrakeMultiple
@@ -194,9 +194,9 @@
  *   since unifor is the opposite. 
  * 
  * * attackProbablityRandomBrakeArray
- *   This is an array of values or probability of Brakeing, also known as p.
- *   p=0 means there are no probability of Brakeing, p=1 means that will be
- *   Brakeing.
+ *   This is an array of values or probability of braking, also known as p.
+ *   p=0 means there are no probability of braking, p=1 means that will be
+ *   braking.
  *   This parameter is used when there are different p for each cell on the 
  *   road.
  * 
