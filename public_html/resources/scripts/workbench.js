@@ -13,11 +13,11 @@
 /**
  * This assigns behaviours to radio button "Uniform" in control simulations
  */
-document.getElementById("controlProbabilityRandomBreakUniform").addEventListener('click', function (event) {
+document.getElementById("controlProbabilityRandomBrakeUniform").addEventListener('click', function (event) {
     if (event.target && event.target.matches("input[type='radio']")) {
 
         //Enable uniform value
-        document.getElementById("controlProbabilityRandomBreak").disabled = false;
+        document.getElementById("controlProbabilityRandomBrake").disabled = false;
 
         //Enable multiple value
         document.getElementById("controlProbabilityMultipleValue").style.display = "none";
@@ -31,11 +31,11 @@ document.getElementById("controlProbabilityRandomBreakUniform").addEventListener
 /**
  * This assigns behaviours to radio button "Uniform" in under-attack simulations
  */
-document.getElementById("attackProbabilityRandomBreakUniform").addEventListener('click', function (event) {
+document.getElementById("attackProbabilityRandomBrakeUniform").addEventListener('click', function (event) {
     if (event.target && event.target.matches("input[type='radio']")) {
 
         //Enable uniform value
-        document.getElementById("attackProbabilityRandomBreak").disabled = false;
+        document.getElementById("attackProbabilityRandomBrake").disabled = false;
 
         //Enable multiple value
         document.getElementById("attackProbabilityMultipleValue").style.display = "none";
@@ -49,21 +49,21 @@ document.getElementById("attackProbabilityRandomBreakUniform").addEventListener(
 /**
  * This assigns behaviours to radio button "Multiple" in control simulations
  */
-document.getElementById("controlProbabilityRandomBreakMultiple").addEventListener('click', function (event) {
+document.getElementById("controlProbabilityRandomBrakeMultiple").addEventListener('click', function (event) {
     if (event.target && event.target.matches("input[type='radio']")) {
 
         //Disable uniform value
-        document.getElementById("controlProbabilityRandomBreak").disabled = true;
+        document.getElementById("controlProbabilityRandomBrake").disabled = true;
 
 
         const container = document.getElementById("controlProbabilityMultipleValue");
         const numberOfCells = parseInt(document.getElementById("numberOfCells").value);
-        const uniformValue = document.getElementById("controlProbabilityRandomBreak").value;
+        const uniformValue = document.getElementById("controlProbabilityRandomBrake").value;
         const fieldNamePrefix = "controlProbabilityCell"
         
 
         //Dynamically create additional entry fields
-        workbench.createMultipleProbabilityRandomBreakInputFields(container, numberOfCells, uniformValue, fieldNamePrefix);
+        workbench.createMultipleProbabilityRandomBrakeInputFields(container, numberOfCells, uniformValue, fieldNamePrefix);
 
 
         //Enable multiple value
@@ -79,19 +79,19 @@ document.getElementById("controlProbabilityRandomBreakMultiple").addEventListene
 /**
  * This assigns behaviours to radio button "Multiple" in under-attack simulations
  */
-document.getElementById("attackProbabilityRandomBreakMultiple").addEventListener('click', function (event) {
+document.getElementById("attackProbabilityRandomBrakeMultiple").addEventListener('click', function (event) {
     if (event.target && event.target.matches("input[type='radio']")) {
 
         //Disable uniform value
-        document.getElementById("attackProbabilityRandomBreak").disabled = true;
+        document.getElementById("attackProbabilityRandomBrake").disabled = true;
 
         const container = document.getElementById("attackProbabilityMultipleValue");
         const numberOfCells = parseInt(document.getElementById("numberOfCells").value);
-        const uniformValue = document.getElementById("attackProbabilityRandomBreak").value;
+        const uniformValue = document.getElementById("attackProbabilityRandomBrake").value;
         const fieldNamePrefix = "attackProbabilityCell"
 
         //Dynamically create additional entry fields
-        workbench.createMultipleProbabilityRandomBreakInputFields(container, numberOfCells, uniformValue, fieldNamePrefix);
+        workbench.createMultipleProbabilityRandomBrakeInputFields(container, numberOfCells, uniformValue, fieldNamePrefix);
 
         //Enable multiple value
         document.getElementById("attackProbabilityMultipleValue").style.display = "block";
